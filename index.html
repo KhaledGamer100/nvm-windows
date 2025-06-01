@@ -1,0 +1,1256 @@
+--
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page_title">رحلة ممتعة في عالم العلوم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00BFFF; 
+            --neon-blue-shadow: rgba(0, 191, 255, 0.5); /* Adjusted shadow opacity */
+            --neon-blue-bg-animation: rgba(0, 191, 255, 0.04); 
+
+            --neon-yellow: #FFD700; 
+            --neon-yellow-shadow: rgba(255, 215, 0, 0.5);
+            --neon-yellow-bg-animation: rgba(255, 215, 0, 0.04);
+            
+            --neon-green: #39FF14; 
+            --neon-green-shadow: rgba(57, 255, 20, 0.5);
+            --neon-green-bg-animation: rgba(57, 255, 20, 0.04);
+            
+            --neon-purple: #DA70D6; 
+            --neon-purple-shadow: rgba(218, 112, 214, 0.5);
+            --neon-purple-bg-animation: rgba(218, 112, 214, 0.04);
+
+            --dark-bg: #0a0d14; /* Even darker background */
+            --card-bg: #10141f; /* Darker card background */
+            --border-color: #2c3340; /* Slightly lighter border for better definition */
+            --text-primary: #e1e8f5; /* Lighter primary text */
+            --text-secondary: #a0aec0; /* Tailwind gray-400 for secondary text */
+            --header-gradient-start: #0d1117;
+            --header-gradient-end: #0a0d14;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--dark-bg); 
+            color: var(--text-primary); 
+            transition: background-color 0.3s ease; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body.en {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .unit-card, .extra-content-card {
+            background-color: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                        box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                        border-color 0.4s ease;
+            opacity: 0; 
+            transform: translateY(60px) scale(0.96); /* More pronounced entry */
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 1rem; /* Larger border radius */
+            padding: 2rem 1.5rem; /* More padding */
+        }
+        .unit-card.is-visible, .extra-content-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .unit-card:hover, .extra-content-card:hover {
+            transform: translateY(-12px) scale(1.02); /* Refined hover */
+        }
+        
+        #unit1.unit-card, #unit1 .concept-card { border-color: var(--neon-blue); }
+        #unit1.unit-card:hover, #unit1 .concept-card:hover { box-shadow: 0 0 50px var(--neon-blue-shadow), 0 0 20px var(--neon-blue-shadow) inset; }
+        #unit2.unit-card, #unit2 .concept-card { border-color: var(--neon-yellow); }
+        #unit2.unit-card:hover, #unit2 .concept-card:hover { box-shadow: 0 0 50px var(--neon-yellow-shadow), 0 0 20px var(--neon-yellow-shadow) inset; }
+        #unit3.unit-card, #unit3 .concept-card { border-color: var(--neon-green); }
+        #unit3.unit-card:hover, #unit3 .concept-card:hover { box-shadow: 0 0 50px var(--neon-green-shadow), 0 0 20px var(--neon-green-shadow) inset; }
+        #extra-activities.extra-content-card, #extra-activities .concept-card { border-color: var(--neon-purple); }
+        #extra-activities.extra-content-card:hover, #extra-activities .concept-card:hover { box-shadow: 0 0 50px var(--neon-purple-shadow), 0 0 20px var(--neon-purple-shadow) inset; }
+
+
+        #unit1 .section-title-underline::after, .active-unit-style-blue { background-color: var(--neon-blue); color: var(--neon-blue) !important; border-bottom-color: var(--neon-blue) !important; }
+        #unit2 .section-title-underline::after, .active-unit-style-yellow { background-color: var(--neon-yellow); color: var(--neon-yellow) !important; border-bottom-color: var(--neon-yellow) !important; }
+        #unit3 .section-title-underline::after, .active-unit-style-green { background-color: var(--neon-green); color: var(--neon-green) !important; border-bottom-color: var(--neon-green) !important; }
+        #extra-activities .section-title-underline::after, .active-unit-style-purple { background-color: var(--neon-purple); color: var(--neon-purple) !important; border-bottom-color: var(--neon-purple) !important; }
+        
+        .concept-card {
+             background-color: #0c1018; /* Darker than unit card for depth */
+             border-right-width: 4px; 
+             border-right-style: solid;
+             border-left: none;
+             padding: 1.5rem; 
+             border-radius: 0.5rem; 
+             transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+             margin-bottom: 1.75rem; 
+        }
+        html[dir="ltr"] .concept-card {
+            border-left-width: 4px;
+            border-left-style: solid;
+            border-right: none;
+        }
+        .concept-card:hover {
+            transform: scale(1.025); 
+            background-color: #101623; /* Lighten slightly on hover */
+        }
+
+        .section-title-underline::after {
+            content: ''; display: block; width: 70px; height: 4px; 
+            margin: 12px auto 0; border-radius: 3px; transition: width 0.4s ease-in-out;
+        }
+        .section-title-underline:hover::after { width: 160px; } /* Wider underline on hover */
+
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease, transform 0.2s ease;
+        }
+        .nav-link:hover:not(.active) {
+            transform: translateY(-2px);
+            color: #b0c8ff; /* Lighter blue for hover */
+        }
+        .nav-link.active { 
+            font-weight: bold; 
+            border-bottom-width: 3px; 
+            padding-bottom: 6px; 
+            transform: translateY(-1px); /* Slight lift for active link */
+        }
+
+        .sub-section-card {
+            background-color: #1c222e; 
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0.75rem; 
+            border: 1px solid #2a303b;
+            padding: 1.75rem; /* More padding */
+        }
+        .sub-section-card:hover {
+            background-color: #252c38;
+            transform: translateY(-6px) scale(1.03); 
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+        }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0d1117; }
+        ::-webkit-scrollbar-thumb { background: #222833; border-radius: 5px; } 
+        ::-webkit-scrollbar-thumb:hover { background: #30363d; }
+
+        .loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0d1117; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; 
+            visibility: visible;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .atom-loader {
+            font-size: 6rem; /* Larger loader */
+            color: var(--neon-blue); 
+            animation: spinAtom 2s linear infinite, pulseAtomNeon 2s ease-in-out infinite alternate;
+        }
+        @keyframes spinAtom { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulseAtomNeon {
+            0% { transform: scale(0.9); opacity: 0.6; filter: drop-shadow(0 0 15px currentColor); }
+            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 35px currentColor); }
+        }
+        .loader p {
+            margin-top: 1.75rem; font-size: 1.4rem; color: currentColor; 
+            animation: flickerText 2s infinite;
+        }
+        @keyframes flickerText { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        .collapsible-question {
+            cursor: pointer; padding: 1.25rem 1.5rem; background-color: #1c222e; 
+            border-radius: 0.75rem; margin-bottom: 0.5rem; display: flex;
+            justify-content: space-between; align-items: center; transition: background-color 0.2s ease, letter-spacing 0.2s ease, transform 0.2s ease;
+        }
+        .collapsible-question:hover { background-color: #252c38; letter-spacing: 0.5px; transform: translateX(3px) rtl:translateX(-3px); }
+        .collapsible-question .fas { transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); } /* Bounce effect for chevron */
+        .collapsible-question.active .fas { transform: rotate(180deg); }
+        .collapsible-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), padding 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.6s ease-out;
+            background-color: #101623; padding: 0 1.5rem;
+            border-radius: 0 0 0.75rem 0.75rem; border: 1px solid #2a303b;
+            border-top: none; opacity: 0;
+        }
+        .collapsible-answer.open { padding: 1.5rem; opacity: 1; }
+
+        #scrollToTopBtn {
+            position: fixed; bottom: 30px; 
+            color: #0d1117; border: none; border-radius: 0.75rem; /* Squarish with rounded corners */
+            width: 50px; 
+            height: 50px; font-size: 20px; cursor: pointer; display: none; 
+            opacity: 0; transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease;
+            z-index: 1000; 
+        }
+        html[dir="rtl"] #scrollToTopBtn { right: 30px; left: auto; }
+        html[dir="ltr"] #scrollToTopBtn { left: 30px; right: auto; }
+        #scrollToTopBtn:hover { transform: scale(1.1) translateY(-3px); } 
+        #scrollToTopBtn.show { display: flex; align-items: center; justify-content: center; opacity: 0.85; }
+        #scrollToTopBtn.show:hover { opacity: 1; }
+
+
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(60px) scale(0.9); 
+            transition: opacity 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+
+        .reaction-example img {
+            border: 3px solid; 
+            border-radius: 0.5rem; margin-top: 0.75rem;
+            box-shadow: 0 4px 10px; 
+        }
+        #unit1 .reaction-example img { border-color: var(--neon-blue); box-shadow: 0 4px 10px var(--neon-blue-shadow); }
+        #unit2 .reaction-example img { border-color: var(--neon-yellow); box-shadow: 0 4px 10px var(--neon-yellow-shadow); }
+        #unit3 .reaction-example img { border-color: var(--neon-green); box-shadow: 0 4px 10px var(--neon-green-shadow); }
+
+
+        .unit-background-animation {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 0; pointer-events: none; 
+        }
+        .unit-background-animation i {
+            position: absolute; 
+            font-size: 1.8rem; /* Even more subtle */
+            animation-duration: 40s; /* Slower animation */
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            opacity: 0;
+            filter: blur(2.5px); /* Increased blur */
+        }
+        /* Chemistry Animations (Neon Blue) */
+        #unit1 .unit-background-animation i { color: var(--neon-blue-bg-animation); }
+        #unit1 .unit-background-animation i:nth-child(1) { font-size: 3rem; animation-name: float1; animation-delay: 0s; }
+        #unit1 .unit-background-animation i:nth-child(2) { font-size: 2.2rem; animation-name: float2; animation-delay: 8s; }
+        #unit1 .unit-background-animation i:nth-child(3) { font-size: 3rem; animation-name: float3; animation-delay: 16s; }
+        #unit1 .unit-background-animation i:nth-child(4) { font-size: 2.8rem; animation-name: float1; animation-delay: 24s; transform: scaleX(-1); }
+        
+
+        /* Electricity Animations (Neon Yellow) */
+        #unit2 .unit-background-animation i { color: var(--neon-yellow-bg-animation); }
+        #unit2 .unit-background-animation i:nth-child(1) { font-size: 2.8rem; animation-name: spark1; animation-delay: 0s; }
+        #unit2 .unit-background-animation i:nth-child(2) { font-size: 1.8rem; animation-name: spark2; animation-delay: 3.5s; }
+        #unit2 .unit-background-animation i:nth-child(3) { font-size: 3.8rem; animation-name: spark1; animation-delay: 7s; transform: scaleX(-1); }
+        #unit2 .unit-background-animation i:nth-child(4) { font-size: 2.2rem; animation-name: spark2; animation-delay: 10.5s; }
+        
+
+        /* Genetics Animations (Neon Green) */
+        #unit3 .unit-background-animation i { color: var(--neon-green-bg-animation); }
+        #unit3 .unit-background-animation i:nth-child(1) { font-size: 4rem; animation-name: dnaTwist1; animation-delay: 0s; }
+        #unit3 .unit-background-animation i:nth-child(2) { font-size: 3rem; animation-name: dnaTwist2; animation-delay: 8s; }
+        #unit3 .unit-background-animation i:nth-child(3) { font-size: 5rem; animation-name: dnaTwist1; animation-delay: 16s; transform: scaleX(-1); }
+        #unit3 .unit-background-animation i:nth-child(4) { font-size: 3rem; animation-name: dnaTwist2; animation-delay: 24s; }
+        
+        
+        /* Extra Activities Animation (Neon Purple) */
+        #extra-activities .unit-background-animation i { color: var(--neon-purple-bg-animation); }
+        #extra-activities .unit-background-animation i:nth-child(1) { font-size: 3.2rem; animation-name: float1; animation-delay: 2.5s; }
+        #extra-activities .unit-background-animation i:nth-child(2) { font-size: 2.8rem; animation-name: float2; animation-delay: 9s; transform: scaleX(-1); }
+        #extra-activities .unit-background-animation i:nth-child(3) { font-size: 4.2rem; animation-name: float3; animation-delay: 16.5s; }
+
+
+        @keyframes float1 { 
+            0% { transform: translate(5vw, 105vh) rotate(0deg) scale(0.5); opacity: 0; }
+            25% { opacity: 0.6; }
+            75% { opacity: 0.6; }
+            100% { transform: translate(90vw, -25vh) rotate(150deg) scale(1); opacity: 0; }
+        }
+        @keyframes float2 {
+            0% { transform: translate(95vw, 100vh) rotate(0deg) scale(0.4); opacity: 0; }
+            25% { opacity: 0.5; }
+            75% { opacity: 0.5; }
+            100% { transform: translate(2vw, -20vh) rotate(-180deg) scale(0.9); opacity: 0; }
+        }
+         @keyframes float3 {
+            0% { transform: translate(40vw, 110vh) rotate(25deg) scale(0.6); opacity: 0; }
+            25% { opacity: 0.65; }
+            75% { opacity: 0.65; }
+            100% { transform: translate(65vw, -30vh) rotate(-65deg) scale(1); opacity: 0; }
+        }
+
+        @keyframes spark1 { 
+            0%, 20%, 40%, 60%, 80%, 100% { opacity: 0; transform: scale(0.2) rotate(0deg); }
+            10%, 50% { opacity: 0.7; transform: scale(0.9) rotate(25deg); }
+            30%, 70% { opacity: 0.7; transform: scale(0.9) rotate(-25deg); }
+        }
+        @keyframes spark2 {
+            0%, 25%, 50%, 75%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+            12.5%, 62.5% { opacity: 0.5; transform: scale(0.8) rotate(-30deg); }
+            37.5%, 87.5% { opacity: 0.5; transform: scale(0.8) rotate(30deg); }
+        }
+        @keyframes dnaTwist1 { 
+            0% { transform: translate(6vw, 105vh) rotate(0deg) scaleY(0.5) scaleX(0.7); opacity: 0; }
+            25% { opacity: 0.7; }
+            75% { opacity: 0.7; }
+            100% { transform: translate(85vw, -25vh) rotate(310deg) scaleY(1) scaleX(0.9); opacity: 0; }
+        }
+        @keyframes dnaTwist2 {
+            0% { transform: translate(90vw, 95vh) rotate(0deg) scaleY(0.6) scaleX(0.9); opacity: 0; }
+            25% { opacity: 0.4; }
+            75% { opacity: 0.4; }
+            100% { transform: translate(10vw, -20vh) rotate(-310deg) scaleY(0.9) scaleX(0.7); opacity: 0; }
+        }
+        .language-switcher button {
+            background-color: #21262d; 
+            color: #9ba6b8; 
+            padding: 0.6rem 1.1rem; 
+            border-radius: 0.5rem; 
+            margin: 0 0.3rem;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            border: 1px solid #30363d; 
+            font-weight: 500;
+        }
+        .language-switcher button:hover {
+            background-color: #30363d;
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+        .language-switcher button.active-lang {
+            color: #0d1117; 
+            font-weight: bold;
+            box-shadow: 0 0 10px currentColor; 
+        }
+        .equation {
+            direction: ltr; 
+            text-align: left;
+            padding: 0.75rem 1rem; 
+            background-color: #0b0f17; 
+            border-radius: 0.375rem; 
+            margin: 0.75rem 0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; 
+            font-size: 1em; 
+            color: #b0c8ff; 
+            overflow-x: auto; 
+            border: 1px solid #222833;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3) inset; 
+        }
+        .equation .text-red-400 { color: #ff7b72; } 
+        .equation .text-green-400 { color: #72ff7b; } 
+        .equation .text-blue-400 { color: #72b8ff; } 
+        .equation .text-gray-400 { color: #a7b0c1; } 
+        .equation .text-gray-700 { color: #30363d; } 
+        .equation .text-gray-300 { color: #c9d1d9; }
+        .equation .text-yellow-200 { color: #ffee72; }
+        .equation i.fas {
+            font-size: 0.8em; 
+            margin: 0 0.2em;
+        }
+
+    </style>
+</head>
+<body class="scroll-smooth">
+
+    <div id="loader" class="loader">
+        <i class="fas fa-atom atom-loader"></i>
+        <p data-key="loader_text">لحظات وننطلق في رحلة العلوم!</p>
+    </div>
+
+    <header class="bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white py-24 md:py-32 text-center shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5"> 
+            <i class="fas fa-flask-vial text-8xl md:text-9xl text-sky-800 absolute top-1/4 left-1/4 animate-pulse opacity-50" style="animation-duration: 6s; animation-delay: 0.5s;"></i>
+            <i class="fas fa-dna text-7xl md:text-8xl text-green-800 absolute bottom-1/4 right-1/4 animate-ping opacity-40" style="animation-duration: 7s; animation-delay: 1s;"></i>
+            <i class="fas fa-bolt text-6xl md:text-7xl text-yellow-700 absolute top-1/2 right-1/3 animate-bounce opacity-30" style="animation-duration: 4s; animation-delay: 1.5s;"></i>
+            <i class="fas fa-atom text-8xl md:text-9xl text-purple-800 absolute bottom-1/3 left-1/3 animate-pulse opacity-50" style="animation-duration: 5.5s; animation-delay: 0.2s;"></i>
+            <i class="fas fa-microscope text-7xl md:text-8xl text-blue-800 absolute top-1/3 right-1/6 animate-ping opacity-40" style="animation-duration: 6.5s; animation-delay: 0.8s;"></i>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <i class="fas fa-rocket text-5xl md:text-6xl text-sky-400 mb-8 transform transition-transform duration-500 hover:scale-125 hover:rotate-[-12deg] drop-shadow-[0_0_15px_rgba(0,191,255,0.7)]"></i>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 animate-on-scroll tracking-tight" data-key="header_title">رحلة ممتعة في عالم العلوم</h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-sky-300 animate-on-scroll" style="transition-delay: 0.2s;" data-key="header_subtitle">استكشف ألغاز الكون معنا بطريقة شيقة ومبسطة!</p>
+        </div>
+    </header>
+
+    <nav id="main-nav" class="bg-gray-800/80 backdrop-blur-md text-gray-300 sticky top-0 z-50 shadow-lg border-b border-gray-700/50">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex flex-wrap justify-between items-center">
+            <div class="font-bold text-xl" data-key="nav_brand_jannah" id="nav-brand-text">
+                <i class="fas fa-satellite-dish mr-2 rtl:ml-2"></i>Jannah Science
+            </div>
+            <div class="flex items-center order-1 md:order-3"> 
+                 <div class="language-switcher flex items-center">
+                    <button id="lang-ar" class="active-lang" data-lang="ar">عربي</button>
+                    <button id="lang-en" data-lang="en">EN</button>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-sky-400 focus:outline-none ml-3 rtl:mr-3">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div class="hidden md:flex flex-grow justify-center items-center order-2 mt-2 md:mt-0" id="nav-links-container">
+                <a href="#unit1" class="nav-link hover:text-sky-400 transition-colors px-3 py-2 mx-1 rounded-md" data-key="nav_unit1">الوحدة الأولى: الكيمياء</a>
+                <a href="#unit2" class="nav-link hover:text-sky-400 transition-colors px-3 py-2 mx-1 rounded-md" data-key="nav_unit2">الوحدة الثانية: الكهرباء والذرة</a>
+                <a href="#unit3" class="nav-link hover:text-sky-400 transition-colors px-3 py-2 mx-1 rounded-md" data-key="nav_unit3">الوحدة الثالثة: الوراثة</a>
+                <a href="#extra-activities" class="nav-link hover:text-sky-400 transition-colors px-3 py-2 mx-1 rounded-md" data-key="nav_extra">أنشطة إضافية</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-700/90 backdrop-blur-sm py-2">
+            <a href="#unit1" class="block text-center py-2 px-4 hover:bg-gray-600/70 nav-link-mobile" data-key="nav_unit1_mobile">الوحدة الأولى: الكيمياء</a>
+            <a href="#unit2" class="block text-center py-2 px-4 hover:bg-gray-600/70 nav-link-mobile" data-key="nav_unit2_mobile">الوحدة الثانية: الكهرباء والذرة</a>
+            <a href="#unit3" class="block text-center py-2 px-4 hover:bg-gray-600/70 nav-link-mobile" data-key="nav_unit3_mobile">الوحدة الثالثة: الوراثة</a>
+            <a href="#extra-activities" class="block text-center py-2 px-4 hover:bg-gray-600/70 nav-link-mobile" data-key="nav_extra_mobile">أنشطة إضافية</a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+        <section class="my-12 text-center animate-on-scroll">
+            <p class="text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto text-gray-300" data-key="intro_text">
+                أهلاً يا بطل العلوم الصغير! مستعدين نبدأ رحلة ممتعة جداً في عالم العلوم مع بعض؟ تخيل معايا إننا هنكتشف حاجات جديدة ومثيرة، كأننا محققين صغار بنحل ألغاز الكون! كل اللي هنقوله ده جاي من المصادر اللي عندك بالظبط، وهنحاول نخليه بسيط وممتع كأنك بتلعب!
+            </p>
+        </section>
+
+        <section id="unit1" class="my-16 scroll-mt-20 unit-card">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title-underline animate-on-scroll" style="color: var(--neon-blue);" data-key="unit1_main_title"><i class="fas fa-flask-vial mr-3 rtl:ml-3"></i>الوحدة الأولى: التفاعلات الكيميائية</h2>
+            <div class="rounded-lg p-6 md:p-8 shadow-xl relative">
+                <div class="unit-background-animation">
+                    <i class="fas fa-atom"></i><i class="fas fa-bong"></i><i class="fas fa-burn"></i><i class="fas fa-atom"></i><i class="fas fa-flask"></i>
+                </div>
+                <div class="relative z-10"> 
+                    <p class="mb-6 text-lg" data-key="unit1_intro_detailed_full">التفاعل الكيميائي هو عملية بتتضمن تكسير الروابط الموجودة في جزيئات المواد المتفاعلة (الرياكتانتس)، وتكوين روابط جديدة في جزيئات المواد الناتجة من التفاعل (البرودكتس). المواد اللي دخلت التفاعل الكيميائي دي اسمها رياكتانتس.</p>
+                    
+                    <div class="mb-8 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.1s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-blue);" data-key="unit1_importance_title_full"><i class="fas fa-lightbulb mr-2 rtl:ml-2 text-yellow-400"></i>أهمية التفاعلات الكيميائية</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4 rtl:pr-4 text-gray-300">
+                            <li data-key="unit1_importance1_full"><i class="fas fa-gas-pump text-orange-400 mr-2 rtl:ml-2"></i>احتراق الوقود في السيارات.</li>
+                            <li data-key="unit1_importance2_full"><i class="fas fa-seedling text-green-400 mr-2 rtl:ml-2"></i>البناء الضوئي في النباتات.</li>
+                            <li data-key="unit1_importance3_full"><i class="fas fa-pills text-blue-400 mr-2 rtl:ml-2"></i>صناعة الأدوية، <i class="fas fa-leaf text-green-500 mr-1 rtl:ml-1"></i>الأسمدة، و<i class="fas fa-vest-patches text-purple-400 mr-1 rtl:ml-1"></i>الألياف الصناعية.</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-semibold mb-4 animate-on-scroll" style="transition-delay: 0.2s; color: var(--neon-blue);" data-key="unit1_types_title_full"><i class="fas fa-tags mr-2 rtl:ml-2"></i>أنواع التفاعلات الكيميائية</h3>
+                    
+                    <div class="mb-6 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.3s;">
+                        <h4 class="text-xl font-bold mb-2" style="color: var(--neon-blue);" data-key="unit1_type_thermal_full"><i class="fas fa-fire-alt mr-2 rtl:ml-2 text-red-500"></i>1. الانحلال الحراري (Thermal Decomposition)</h4>
+                        <p class="text-sm text-gray-400 mb-3" data-key="unit1_type_thermal_desc_detailed_full">تفكك المركب بالحرارة إلى مكوناته الأساسية أو مركبات أبسط منه. رمز التسخين في المعادلات هو مثلث صغير فوق السهم.</p>
+                        <div class="space-y-3">
+                            <p data-key="unit1_thermal_metal_oxides_full"><strong>أكسيد الفلزات:</strong> يتفكك أكسيد الفلز بالحرارة إلى الفلز والأكسجين. مثال: <span class="equation">2HgO <span class="text-red-400">(أحمر)</span> --(حرارة)--> 2Hg <span class="text-gray-400">(فضي)</span> + O₂ <i class="fas fa-arrow-up text-xs"></i></span></p>
+                            <p data-key="unit1_thermal_metal_hydroxides_full"><strong>هيدروكسيد الفلزات:</strong> يتفكك هيدروكسيد الفلز بالحرارة إلى أكسيد الفلز وبخار الماء. مثال: <span class="equation">Cu(OH)₂ <span class="text-blue-400">(أزرق)</span> --(حرارة)--> CuO <span class="text-gray-700">(أسود)</span> + H₂O <i class="fas fa-arrow-up text-xs"></i></span></p>
+                            <p data-key="unit1_thermal_metal_carbonates_full"><strong>كربونات الفلزات:</strong> تتفكك كربونات الفلز بالحرارة إلى أكسيد الفلز وغاز ثاني أكسيد الكربون (يعكر ماء الجير). مثال: <span class="equation">CuCO₃ <span class="text-green-400">(أخضر)</span> --(حرارة)--> CuO <span class="text-gray-700">(أسود)</span> + CO₂ <i class="fas fa-arrow-up text-xs"></i></span></p>
+                            <p data-key="unit1_thermal_metal_sulfates_full"><strong>كبريتات الفلزات:</strong> تتفكك كبريتات الفلز بالحرارة إلى أكسيد الفلز وثالث أكسيد الكبريت. مثال: <span class="equation">CuSO₄ <span class="text-blue-400">(أزرق)</span> --(حرارة)--> CuO <span class="text-gray-700">(أسود)</span> + SO₃ <i class="fas fa-arrow-up text-xs"></i></span></p>
+                            <p data-key="unit1_thermal_metal_nitrates_full"><strong>نترات الفلزات:</strong> تتفكك نترات الفلز بالحرارة إلى نيتريت الفلز والأكسجين. مثال: <span class="equation">2NaNO₃ <span class="text-gray-300">(أبيض)</span> --(حرارة)--> 2NaNO₂ <span class="text-yellow-200">(أبيض مصفر)</span> + O₂ <i class="fas fa-arrow-up text-xs"></i></span></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.4s;">
+                        <h4 class="text-xl font-bold mb-2" style="color: var(--neon-blue);" data-key="unit1_type_substitution_full"><i class="fas fa-people-arrows mr-2 rtl:ml-2 text-green-400"></i>2. الإحلال (Substitution)</h4>
+                        <p class="text-sm text-gray-400 mb-3" data-key="unit1_type_substitution_desc_detailed_full">تفاعل يتم فيه تبديل عنصر محل عنصر آخر (الأكثر نشاطاً يحل محل الأقل نشاطاً حسب متسلسلة النشاط الكيميائي).</p>
+                        <div class="space-y-3">
+                            <p data-key="unit1_sub_simple_title_full"><strong>أ. إحلال بسيط:</strong> يحل عنصر نشط محل عنصر أقل نشاطاً في أحد محاليل مركباته.</p>
+                            <ul class="list-disc list-inside space-y-1 pl-6 rtl:pr-6 text-sm text-gray-300">
+                                <li data-key="unit1_sub_simple_water_full">فلز محل هيدروجين الماء: <span class="equation">2Na + 2H₂O --> 2NaOH + H₂ <i class="fas fa-arrow-up text-xs"></i> + حرارة</span> (يشتعل بفرقعه).</li>
+                                <li data-key="unit1_sub_simple_acid_full">فلز محل هيدروجين الحمض المخفف: <span class="equation">Zn + 2HCl --> ZnCl₂ + H₂ <i class="fas fa-arrow-up text-xs"></i></span> (النحاس لا يتفاعل).</li>
+                                <li data-key="unit1_sub_simple_metal_full">فلز محل فلز آخر في محلول أحد أملاحه: <span class="equation">Mg + CuSO₄ <span class="text-blue-400">(أزرق)</span> --> MgSO₄ <span class="text-gray-400">(عديم اللون)</span> + Cu <span class="text-red-500">(راسب أحمر)</span></span></li>
+                            </ul>
+                            <p data-key="unit1_sub_double_title_full"><strong>ب. إحلال مزدوج:</strong> يتم فيه تبادل مزدوج بين أيوني مركبين لتكوين مركبين جديدين.</p>
+                             <ul class="list-disc list-inside space-y-1 pl-6 rtl:pr-6 text-sm text-gray-300">
+                                <li data-key="unit1_sub_double_acid_alkali_full">حمض مع قلوي (التعادل): <span class="equation">HCl + NaOH --> NaCl + H₂O</span></li>
+                                <li data-key="unit1_sub_double_acid_salt_full">حمض مع ملح كربونات: <span class="equation">2HCl + Na₂CO₃ --> 2NaCl + H₂O + CO₂ <i class="fas fa-arrow-up text-xs"></i></span> (يعكر ماء الجير).</li>
+                                <li data-key="unit1_sub_double_salt_salt_full">محلول ملح مع محلول ملح آخر: <span class="equation">NaCl + AgNO₃ --> NaNO₃ + AgCl <span class="text-gray-400">(راسب أبيض)</span></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.5s;">
+                        <h4 class="text-xl font-bold mb-2" style="color: var(--neon-blue);" data-key="unit1_type_redox_full"><i class="fas fa-sync-alt mr-2 rtl:ml-2 text-blue-400"></i>3. الأكسدة والاختزال (Oxidation and Reduction)</h4>
+                        <div class="mb-3">
+                            <p class="text-sm font-semibold text-gray-300" data-key="unit1_redox_traditional_title_full">المفهوم التقليدي:</p>
+                            <ul class="list-disc list-inside space-y-1 pl-6 rtl:pr-6 text-xs text-gray-400">
+                                <li data-key="unit1_redox_trad_oxidation_full">الأكسدة: هي عملية كيميائية تؤدي إلى زيادة نسبة الأكسجين أو نقص نسبة الهيدروجين في المادة.</li>
+                                <li data-key="unit1_redox_trad_reduction_full">الاختزال: هي عملية كيميائية تؤدي إلى نقص نسبة الأكسجين أو زيادة نسبة الهيدروجين في المادة.</li>
+                                <li data-key="unit1_redox_trad_oxidizing_agent">العامل المؤكسد: المادة التي تمنح الأكسجين أو تسحب الهيدروجين.</li>
+                                <li data-key="unit1_redox_trad_reducing_agent">العامل المختزل: المادة التي تسحب الأكسجين أو تمنح الهيدروجين.</li>
+                            </ul>
+                            <p class="text-xs text-gray-400 mt-1" data-key="unit1_redox_trad_example_full">مثال: <span class="equation">CuO + H₂ --(حرارة)--> Cu + H₂O</span> (H₂ حدث له أكسدة، CuO حدث له اختزال. H₂ عامل مختزل، CuO عامل مؤكسد).</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold text-gray-300" data-key="unit1_redox_electronic_title_full">المفهوم الإلكتروني:</p>
+                            <ul class="list-disc list-inside space-y-1 pl-6 rtl:pr-6 text-xs text-gray-400">
+                                <li data-key="unit1_redox_elec_oxidation_full">الأكسدة: هي عملية كيميائية تفقد فيها الذرة إلكتروناً أو أكثر.</li>
+                                <li data-key="unit1_redox_elec_reduction_full">الاختزال: هي عملية كيميائية تكتسب فيها الذرة إلكتروناً أو أكثر.</li>
+                                 <li data-key="unit1_redox_elec_oxidizing_agent">العامل المؤكسد: المادة التي تكتسب إلكتروناً أو أكثر (تحدث لها عملية اختزال).</li>
+                                <li data-key="unit1_redox_elec_reducing_agent">العامل المختزل: المادة التي تفقد إلكتروناً أو أكثر (تحدث لها عملية أكسدة).</li>
+                            </ul>
+                             <p class="text-xs text-gray-400 mt-1" data-key="unit1_redox_elec_example_full">مثال: <span class="equation">2Na + Cl₂ --> 2NaCl</span> (Na فقد إلكترون (أكسدة)، Cl اكتسب إلكترون (اختزال). Na عامل مختزل، Cl₂ عامل مؤكسد).</p>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-8 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.6s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-blue);" data-key="unit1_speed_title_full"><i class="fas fa-stopwatch-20 mr-2 rtl:ml-2 text-purple-400"></i>سرعة التفاعل الكيميائي</h3>
+                        <p class="mb-2 text-gray-300" data-key="unit1_speed_definition_full">معدل التغير في تركيز المتفاعلات والنواتج في وحدة الزمن. يمكن قياسه بمعدل اختفاء أحد المتفاعلات أو ظهور أحد النواتج.</p>
+                        <h4 class="text-xl font-bold mb-2" style="color: var(--neon-blue);" data-key="unit1_speed_factors_title_full">العوامل المؤثرة على سرعة التفاعل الكيميائي:</h4>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none pl-0 text-gray-300">
+                            <li class="flex items-start" data-key="unit1_factor_nature_detailed_full"><div><i class="fas fa-flask text-sky-400 mr-2 rtl:ml-2 mt-1"></i><strong>طبيعة المواد المتفاعلة:</strong><br> أ. نوع الرابطة: المركبات الأيونية تفاعلاتها سريعة، التساهمية بطيئة.<br> ب. مساحة سطح المتفاعلات: كلما زادت مساحة السطح، زادت سرعة التفاعل.</div></li>
+                            <li class="flex items-start" data-key="unit1_factor_concentration_detailed_full"><i class="fas fa-vial text-sky-400 mr-2 rtl:ml-2 mt-1"></i><div><strong>تركيز المتفاعلات:</strong> كلما زاد التركيز، زادت سرعة التفاعل لزيادة عدد التصادمات.</div></li>
+                            <li class="flex items-start" data-key="unit1_factor_temp_detailed_full"><i class="fas fa-temperature-high text-sky-400 mr-2 rtl:ml-2 mt-1"></i><div><strong>درجة حرارة التفاعل:</strong> كلما زادت درجة الحرارة، زادت سرعة التفاعل لزيادة سرعة الجزيئات والتصادمات.</div></li>
+                            <li class="flex items-start" data-key="unit1_factor_catalyst_detailed_full"><i class="fas fa-hat-wizard text-sky-400 mr-2 rtl:ml-2 mt-1"></i><div><strong>العوامل الحفازة والإنزيمات:</strong><br> العامل الحفاز: مادة تغير سرعة التفاعل دون أن تستهلك (موجب يزيد، سالب يقلل).<br> الإنزيمات: عوامل حفازة حيوية تزيد سرعة التفاعلات البيولوجية.</div></li>
+                        </ul>
+                    </div>
+                    <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.7s;">
+                         <h3 class="text-xl font-semibold mb-2" style="color: var(--neon-blue);" data-key="unit1_app_airbag_title_detailed_full"><i class="fas fa-car-burst mr-2 rtl:ml-2 text-red-400"></i>تطبيق: الوسادة الهوائية (الإيرباج) والمحول الحفزي</h3>
+                         <p class="text-sm text-gray-300 mb-2" data-key="unit1_app_airbag_desc_detailed_full"><strong>الإيرباج:</strong> مادة أزيد الصوديوم (NaN₃) تتفكك بالشرر الكهربي سريعاً لغاز نيتروجين يملأ الوسادة. <span class="equation">2NaN₃ --(شرر كهربي)--> 2Na + 3N₂ <i class="fas fa-arrow-up text-xs"></i></span></p>
+                         <p class="text-sm text-gray-300" data-key="unit1_app_catalytic_converter_full"><strong>المحول الحفزي:</strong> علبة معدنية في السيارات الحديثة تعالج الغازات الضارة الناتجة من المحرك باستخدام عوامل حفازة (بلاتين، إيريديوم، بلاديوم) وتحولها لغازات أقل ضرراً.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="unit2" class="my-16 scroll-mt-20 unit-card">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 section-title-underline animate-on-scroll" style="color: var(--neon-yellow);" data-key="unit2_main_title_detailed"><i class="fas fa-lightbulb mr-3 rtl:ml-3"></i>الوحدة الثانية: الطاقة الكهربية والنشاط الإشعاعي</h2>
+            <div class="rounded-lg p-6 md:p-8 shadow-xl relative">
+                <div class="unit-background-animation">
+                    <i class="fas fa-bolt"></i><i class="fas fa-atom"></i><i class="fas fa-plug"></i><i class="fas fa-lightbulb"></i><i class="fas fa-bolt"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="mb-12 animate-on-scroll" style="transition-delay: 0.1s;">
+                        <h3 class="text-2xl font-semibold mb-6 text-center" style="color: var(--neon-yellow);" data-key="unit2_electricity_title_detailed_full"><i class="fas fa-plug mr-2 rtl:ml-2"></i>الخصائص الفيزيائية للتيار الكهربي</h3>
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="sub-section-card p-5 rounded-lg shadow-md text-center animate-on-scroll" style="transition-delay: 0.2s;">
+                                <i class="fas fa-tachometer-alt text-3xl mb-2" style="color: var(--neon-yellow);"></i>
+                                <h4 class="text-xl font-bold mb-1" style="color: var(--neon-yellow);" data-key="unit2_current_intensity_detailed_full">شدة التيار الكهربي (I)</h4>
+                                <p class="text-sm text-gray-400" data-key="unit2_current_intensity_desc_detailed_full">كمية الشحنة الكهربية (Q) التي تمر عبر مقطع موصل في الثانية الواحدة (t). القانون: I = Q / t. وحدة القياس: الأمبير (A). جهاز القياس: الأميتر (يوصل على التوالي).</p>
+                            </div>
+                            <div class="sub-section-card p-5 rounded-lg shadow-md text-center animate-on-scroll" style="transition-delay: 0.3s;">
+                                <i class="fas fa-car-battery text-3xl mb-2" style="color: var(--neon-yellow);"></i>
+                                <h4 class="text-xl font-bold mb-1" style="color: var(--neon-yellow);" data-key="unit2_potential_difference_detailed_full">فرق الجهد الكهربي (V)</h4>
+                                <p class="text-sm text-gray-400" data-key="unit2_potential_difference_desc_detailed_full">الشغل المبذول (W) لنقل كمية من الشحنة الكهربية (Q) مقدارها واحد كولوم بين نقطتين. القانون: V = W / Q. وحدة القياس: الفولت (V). جهاز القياس: الفولتميتر (يوصل على التوازي).</p>
+                            </div>
+                            <div class="sub-section-card p-5 rounded-lg shadow-md text-center animate-on-scroll" style="transition-delay: 0.4s;">
+                                <i class="fas fa-wave-square text-3xl mb-2" style="color: var(--neon-yellow);"></i>
+                                <h4 class="text-xl font-bold mb-1" style="color: var(--neon-yellow);" data-key="unit2_resistance_detailed_full">المقاومة الكهربية (R)</h4>
+                                <p class="text-sm text-gray-400" data-key="unit2_resistance_desc_detailed_full">الممانعة التي يلقاها التيار الكهربي أثناء مروره في الموصل. وحدة القياس: الأوم (Ω). جهاز القياس: الأوميتر. الريوستات المنزلق: مقاومة متغيرة للتحكم في شدة التيار وفرق الجهد.</p>
+                            </div>
+                        </div>
+                        <p class="text-center text-lg mb-6 concept-card p-3 rounded-md animate-on-scroll" style="transition-delay: 0.5s;"><strong style="color: var(--neon-yellow);" data-key="unit2_ohms_law_title_detailed_full">قانون أوم:</strong> <span data-key="unit2_ohms_law_formula_detailed_full">يتناسب فرق الجهد بين طرفي موصل تناسباً طردياً مع شدة التيار المار فيه عند ثبوت درجة الحرارة. (R = V / I).</span></p>
+                        
+                        <h4 class="text-xl font-semibold mb-3 text-center animate-on-scroll" style="transition-delay: 0.6s; color: var(--neon-yellow);" data-key="unit2_sources_title_detailed_full"><i class="fas fa-charging-station mr-2 rtl:ml-2"></i>التيار الكهربي والمصادر الكهربية</h4>
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.7s;">
+                                <h5 class="font-bold" style="color: var(--neon-yellow);" data-key="unit2_dc_current_title_full">التيار المستمر (DC)</h5>
+                                <p class="text-sm text-gray-300" data-key="unit2_dc_current_desc_full">تيار كهربي ثابت الشدة يسري في اتجاه واحد فقط. المصدر: الخلايا الكهروكيميائية (البطاريات). الاستخدامات: الطلاء الكهربي، تشغيل بعض الأجهزة الكهربية الصغيرة.</p>
+                            </div>
+                            <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.8s;">
+                                <h5 class="font-bold" style="color: var(--neon-yellow);" data-key="unit2_ac_current_title_full">التيار المتردد (AC)</h5>
+                                <p class="text-sm text-gray-300" data-key="unit2_ac_current_desc_full">تيار كهربي متغير الشدة والاتجاه يسري في اتجاهين متعاكسين. المصدر: المولدات الكهربية (الدينامو). الاستخدامات: إنارة المنازل والشوارع، تشغيل معظم الأجهزة، يمكن نقله لمسافات طويلة وتحويله لتيار مستمر.</p>
+                            </div>
+                        </div>
+                         <h4 class="text-xl font-semibold mb-3 text-center animate-on-scroll" style="transition-delay: 0.9s; color: var(--neon-yellow);" data-key="unit2_connection_title_detailed_full"><i class="fas fa-network-wired mr-2 rtl:ml-2"></i>توصيل الخلايا الكهربية</h4>
+                         <p class="text-sm text-gray-400 mb-3 text-center" data-key="unit2_emf_intro">القوة الدافعة الكهربية (emf): فرق الجهد بين طرفي المصدر الكهربي في الدائرة المفتوحة.</p>
+                         <div class="grid md:grid-cols-2 gap-6">
+                            <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 1s;">
+                                <h5 class="font-bold" style="color: var(--neon-yellow);" data-key="unit2_connection_series_title_detailed_full">توصيل على التوالي</h5>
+                                <p class="text-sm text-gray-300" data-key="unit2_connection_series_desc_detailed_full">القوة الدافعة الكلية = مجموع القوى الدافعة للخلايا.</p>
+                                <img src="https://placehold.co/200x80/171c23/FFD700?text=Series+Connection&font=poppins" alt="توصيل على التوالي" class="mx-auto reaction-example">
+                            </div>
+                            <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 1.1s;">
+                                <h5 class="font-bold" style="color: var(--neon-yellow);" data-key="unit2_connection_parallel_title_detailed_full">توصيل على التوازي (خلايا متماثلة)</h5>
+                                <p class="text-sm text-gray-300" data-key="unit2_connection_parallel_desc_detailed_full">القوة الدافعة الكلية = القوة الدافعة لخلية واحدة.</p>
+                                 <img src="https://placehold.co/200x80/171c23/FFD700?text=Parallel+Connection&font=poppins" alt="توصيل على التوازي" class="mx-auto reaction-example">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="animate-on-scroll" style="transition-delay: 1.2s;">
+                        <h3 class="text-2xl font-semibold mb-6 text-center" style="color: var(--neon-yellow);" data-key="unit2_radioactivity_title_detailed_full"><i class="fas fa-atom-alt mr-2 rtl:ml-2 text-yellow-300"></i>النشاط الإشعاعي والطاقة النووية</h3>
+                        <p class="mb-4 text-lg" data-key="unit2_radioactivity_intro_detailed_full">النشاط الإشعاعي: عملية تحول تلقائي لأنوية ذرات بعض العناصر المشعة الموجودة في الطبيعة كمحاولة للوصول إلى تركيب أكثر استقراراً، وذلك بإصدار إشعاعات غير مرئية (ألفا، بيتا، جاما). العناصر المشعة تحتوي أنوية ذراتها على عدد من النيوترونات يزيد عن العدد اللازم لاستقرارها. اكتشفه العالم هنري بيكريل.</p>
+                        <p class="mb-4 text-lg" data-key="unit2_artificial_radioactivity_desc">النشاط الإشعاعي الصناعي: الإشعاع الناتج عن التفاعلات النووية التي تتم في المفاعلات النووية أو القنابل الذرية.</p>
+                        
+                        <h4 class="text-xl font-semibold mb-3" style="color: var(--neon-yellow);" data-key="unit2_peaceful_uses_title_detailed_full"><i class="fas fa-hand-holding-heart mr-2 rtl:ml-2"></i>الاستخدامات السلمية للطاقة النووية:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-300 pl-4 rtl:pr-4 mb-6">
+                            <li data-key="unit2_peaceful_electricity_full">مجال توليد الكهرباء: استخدام الطاقة الحرارية الناتجة من المفاعلات النووية في تسخين الماء لإنتاج البخار اللازم لإدارة التوربينات.</li>
+                            <li data-key="unit2_peaceful_space_full">مجال استكشاف الفضاء: استخدام الوقود النووي لإطلاق المكوك الفضائي.</li>
+                            <li data-key="unit2_peaceful_industry_full">مجال الصناعة: الكشف عن عيوب المنتجات، تحويل الرمال إلى شرائح سيليكون.</li>
+                            <li data-key="unit2_peaceful_medicine_full">مجال الطب: تشخيص وعلاج بعض الأمراض مثل السرطان.</li>
+                            <li data-key="unit2_peaceful_agriculture_full">مجال الزراعة: القضاء على الآفات الزراعية، تحسين سلالات بعض النباتات.</li>
+                            <li data-key="unit2_peaceful_exploration_full">مجال التنقيب: الكشف عن مصادر المياه الجوفية والبترول.</li>
+                        </ul>
+                        <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 1.5s;">
+                            <h4 class="text-xl font-semibold mb-2" style="color: var(--neon-yellow);" data-key="unit2_pollution_title_detailed_full"><i class="fas fa-exclamation-triangle mr-2 rtl:ml-2 text-orange-400"></i>التلوث الإشعاعي وآثاره</h4>
+                            <p class="text-sm text-gray-300 mb-1" data-key="unit2_pollution_sources_full">مصادر التلوث الإشعاعي: مصادر طبيعية (الإشعاع الكوني، النظائر المشعة في البيئة)، مصادر صناعية (تجارب القنابل الذرية، النفايات المشعة من المفاعلات).</p>
+                            <p class="text-sm text-gray-300 mb-1" data-key="unit2_pollution_large_dose_detailed_full"><strong>التعرض لجرعة إشعاعية كبيرة في فترة زمنية قصيرة:</strong> تدمير نخاع العظام، تدمير الجهاز الهضمي، تدمير الجهاز العصبي المركزي، تدمير الطحال. قد يؤدي إلى الوفاة.</p>
+                            <p class="text-sm text-gray-300" data-key="unit2_pollution_small_dose_detailed_full"><strong>التعرض لجرعات إشعاعية صغيرة في فترة زمنية طويلة:</strong> آثار بدنية (مثل سرطان الجلد)، آثار وراثية (تغيرات في الكروموسومات تؤدي إلى ولادة أطفال مشوهين)، آثار خلوية (تغير في تركيب الخلية مثل تغير تركيب الهيموجلوبين).</p>
+                            <p class="text-xs text-gray-500 mt-1" data-key="unit2_pollution_unit_safe_dose_full">وحدة قياس الإشعاع الممتص: السيفرت (Sv). الميلي سيفرت = 10⁻³ سيفرت. الحد الأقصى الآمن للعاملين: 20 ميلي سيفرت/سنة. للجمهور العام: 1 ميلي سيفرت/سنة.</p>
+                             <p class="text-xs text-gray-500 mt-1" data-key="unit2_pollution_prevention_full">طرق الوقاية من التلوث الإشعاعي: ارتداء ملابس واقية، وضع مصادر الإشعاع في حوائط سميكة من الرصاص أو الخرسانة، دفن النفايات المشعة بعيداً عن البيئة، مراعاة قواعد الأمان.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="unit3" class="my-16 scroll-mt-20 unit-card">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 section-title-underline animate-on-scroll" style="color: var(--neon-green);" data-key="unit3_main_title_detailed_full"><i class="fas fa-dna mr-3 rtl:ml-3"></i>الوحدة الثالثة: مبادئ الوراثة والتنوع الأحيائي</h2>
+            <div class="rounded-lg p-6 md:p-8 shadow-xl relative">
+                 <div class="unit-background-animation">
+                    <i class="fas fa-dna"></i><i class="fas fa-microscope"></i><i class="fas fa-dna"></i><i class="fas fa-user-cog"></i> <i class="fas fa-dna"></i>
+                </div>
+                <div class="relative z-10">
+                    <p class="mb-6 text-lg animate-on-scroll" style="transition-delay: 0.1s;" data-key="unit3_intro_detailed_full">علم الوراثة هو العلم الذي يفسر كيفية انتقال الصفات الوراثية من جيل إلى جيل آخر. الصفات الوراثية هي الصفات التي تنتقل من الآباء إلى الأبناء، أما الصفات المكتسبة فهي الصفات غير القابلة للانتقال.</p>
+
+                    <div class="mb-8 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.2s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-green);" data-key="unit3_mendel_title_detailed_full"><i class="fas fa-leaf mr-2 rtl:ml-2 text-green-400"></i>مبادئ وقوانين مندل</h3>
+                        <p class="mb-1 text-gray-300" data-key="unit3_mendel_concept_full">تتحكم في كل صفة وراثية عاملين وراثيين (جينين) أحدهما من الأب والآخر من الأم.</p>
+                        <p class="mb-1 text-gray-300" data-key="unit3_mendel_dominant_recessive_full"><strong>الصفة السائدة:</strong> الصفة التي تظهر في الجيل الأول عند تزاوج فردين يحمل أحدهما الصفة السائدة النقية والآخر الصفة المتنحية. <strong>الصفة المتنحية:</strong> الصفة التي تختفي في الجيل الأول وتظهر في الجيل الثاني بنسبة قليلة.</p>
+                        <p class="mb-1 text-gray-300" data-key="unit3_mendel_pure_hybrid_full"><strong>الفرد النقي:</strong> الفرد الذي يحمل عاملين وراثيين متماثلين للصفة (TT أو tt). <strong>الفرد الهجين:</strong> الفرد الذي يحمل عاملين وراثيين مختلفين للصفة (Tt).</p>
+                        <p class="mb-1 text-gray-300" data-key="unit3_mendel_gametes"><strong>الجاميتات:</strong> الخلايا الجنسية التي تحمل نصف عدد الكروموسومات وتحتوي على عامل وراثي واحد لكل صفة.</p>
+                        <p class="mt-2" style="color: var(--neon-green);" data-key="unit3_mendel_law1_title_detailed_full"><strong>القانون الأول لمندل (قانون انعزال العوامل):</strong> <span class="text-gray-300" data-key="unit3_mendel_law1_desc_detailed_full">عند تزاوج فردين نقيين مختلفين في زوج من الصفات المتضادة، تورث صفة أحد الأبوين فقط في الجيل الأول (الصفة السائدة)، ثم تورث الصفة السائدة والمتنحية معاً في الجيل الثاني بنسبة 3 : 1.</span></p>
+                        <p class="mt-1" style="color: var(--neon-green);" data-key="unit3_mendel_law2_title_full"><strong>القانون الثاني لمندل (قانون التوزيع الحر للعوامل):</strong> <span class="text-gray-300" data-key="unit3_mendel_law2_desc_full">عند تزاوج فردين نقيين مختلفين في زوجين أو أكثر من الصفات المتضادة، تورث صفة كل زوج مستقلة عن صفة الزوج الآخر وتظهر في الجيل الثاني بنسب محددة.</span></p>
+                    </div>
+
+                    <div class="mb-8 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.3s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-green);" data-key="unit3_human_traits_title_detailed_full"><i class="fas fa-users mr-2 rtl:ml-2"></i>الصفات الوراثية في الإنسان</h3>
+                         <p class="text-gray-300" data-key="unit3_human_traits_examples_detailed_full">أمثلة للصفات السائدة: القدرة على لف اللسان، شحمة الأذن الحرة، الشعر المجعد، الشعر الأسود، العيون الواسعة، العيون البنية، وجود النمش. أمثلة للصفات المتنحية: عكسها.</p>
+                    </div>
+                     <div class="mb-8 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.4s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-green);" data-key="unit3_dna_genes_title_full"><i class="fas fa-microscope mr-2 rtl:ml-2"></i>الكروموسومات والجينات والحمض النووي (DNA)</h3>
+                         <p class="text-gray-300 mb-1" data-key="unit3_chromosome_desc_full"><strong>الكروموسوم:</strong> تركيب يوجد داخل نواة الخلية ويتكون كيميائياً من حمض نووي يسمى DNA مرتبط مع بروتين.</p>
+                         <p class="text-gray-300 mb-1" data-key="unit3_dna_desc_full"><strong>الحمض النووي (DNA):</strong> يحمل المعلومات الوراثية للكائن الحي في صورة جينات. يتكون من شريطين ملتفين حول بعضهما في شكل حلزون مزدوج.</p>
+                         <p class="text-gray-300" data-key="unit3_gene_desc_full"><strong>الجينات (Genes):</strong> أجزاء من الحمض النووي (DNA) موجودة على الكروموسومات، تحمل تعليمات بناء بروتين معين مسئول عن إظهار صفة وراثية محددة.</p>
+                         <p class="mt-2 text-gray-300" data-key="unit3_gene_role_full">دور الجينات في إظهار الصفات الوراثية: كل جين يعطي تعليمة لبناء بروتين، وهذا البروتين يتفاعل مع مواد أخرى لإظهار الصفة الوراثية.</p>
+                    </div>
+                     <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.5s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-green);" data-key="unit3_genome_project_title_full"><i class="fas fa-map-marked-alt mr-2 rtl:ml-2"></i>مشروع الجينوم البشري (Human Genome Project)</h3>
+                         <p class="text-gray-300" data-key="unit3_genome_project_desc_full">خريطة تفصيلية للمجموعات الكاملة للجينات البشرية الموجودة في الكروموسومات. يهدف إلى تحديد تسلسل القواعد الكيميائية في DNA وتحديد جميع الجينات البشرية ومعرفة وظائفها. أهدافه: تحديد الأمراض الوراثية، تطوير أساليب تشخيص وعلاج الأمراض، فهم تطور الإنسان.</p>
+                    </div>
+                    <h3 class="text-2xl font-semibold mt-10 mb-6 text-center animate-on-scroll" style="transition-delay: 0.4s; color: var(--neon-green);" data-key="unit3_hormones_title_original_full"><i class="fas fa-prescription-bottle-medical mr-2 rtl:ml-2 text-pink-400"></i>الهرمونات: رسائل الجسم الكيميائية</h3>
+                    <p class="mb-4 text-lg animate-on-scroll" style="transition-delay: 0.5s;" data-key="unit3_hormones_intro_original_full">هي مواد كيميائية أو رسائل كيميائية تنتجها غدد صماء، تقوم بتنظيم وتنسيق معظم الأنشطة والوظائف الحيوية في جسم الكائن الحي. تفرزها الغدد الصماء مباشرة في مجرى الدم الذي ينقلها إلى الخلايا المستهدفة. أي خلل (زيادة أو نقص) يسبب "خلل هرموني".</p>
+                    <div class="space-y-4 animate-on-scroll" style="transition-delay: 0.6s;">
+                        <div class="collapsible-item">
+                            <div class="collapsible-question">
+                                <span data-key="gland_pituitary_name_original_full"><i class="fas fa-brain mr-2 rtl:ml-2 text-pink-300"></i>الغدة النخامية (المايسترو)</span> <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="collapsible-answer">
+                                <p data-key="gland_pituitary_desc1_original_full">تقع أسفل المخ. تسمى الغدة الرئيسية لأنها تفرز هرمونات تنظم نشاط معظم الغدد الصماء الأخرى.</p>
+                                <p data-key="gland_pituitary_desc2_original_full"><strong>هرمون النمو:</strong> يتحكم في سرعة نمو الجسم. نقصه في مرحلة الطفولة يسبب القزامة، وزيادته تسبب العملاقة.</p>
+                            </div>
+                        </div>
+                        <div class="collapsible-item">
+                            <div class="collapsible-question">
+                                <span data-key="gland_thyroid_name_original_full"><i class="fas fa-shield-virus mr-2 rtl:ml-2 text-teal-300 transform rotate-180"></i>الغدة الدرقية</span> <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="collapsible-answer">
+                                <p data-key="gland_thyroid_desc_original_full">تقع في الجزء الأمامي من الرقبة. تفرز هرمون الثيروكسين (لعمليات التحول الغذائي، يحتاج ليود) وهرمون الكالسيتونين (ينظم مستوى الكالسيوم).</p>
+                            </div>
+                        </div>
+                         <div class="collapsible-item">
+                            <div class="collapsible-question">
+                                <span data-key="gland_adrenal_name_original_full"><i class="fas fa-bolt-lightning mr-2 rtl:ml-2 text-yellow-300"></i>الغدتان الكظريتان</span> <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="collapsible-answer">
+                                <p data-key="gland_adrenal_desc_original_full">تقعان فوق الكليتين. تفرزان هرمون الأدرينالين (يحفز الجسم للاستجابة في حالات الطوارئ).</p>
+                            </div>
+                        </div>
+                        <div class="collapsible-item">
+                            <div class="collapsible-question">
+                                <span data-key="gland_pancreas_name_original_full"><i class="fas fa-bacterium transform -rotate-45 mr-2 rtl:ml-2 text-green-300"></i>البنكرياس (غدة مختلطة)</span> <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="collapsible-answer">
+                                <p data-key="gland_pancreas_insulin_original_full"><strong>الأنسولين:</strong> يخفض مستوى سكر الجلوكوز في الدم. نقصه يسبب البول السكري.</p>
+                                <p data-key="gland_pancreas_glucagon_original_full"><strong>الجلوكاجون:</strong> يرفع مستوى سكر الجلوكوز في الدم.</p>
+                            </div>
+                        </div>
+                         <div class="collapsible-item">
+                            <div class="collapsible-question">
+                                <span data-key="gland_reproductive_name_original_full"><i class="fas fa-venus-mars mr-2 rtl:ml-2 text-red-300"></i>الغدد التناسلية</span> <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="collapsible-answer">
+                                <p data-key="gland_reproductive_testes_original_full"><strong>الخصيتان (ذكور):</strong> تفرزان هرمون التستوستيرون (مسؤول عن الصفات الجنسية الثانوية الذكرية).</p>
+                                <p data-key="gland_reproductive_ovaries_original_full"><strong>المبيضان (إناث):</strong> يفرزان هرمون الإستروجين (مسؤول عن الصفات الجنسية الثانوية الأنثوية) وهرمون البروجسترون (يحفز نمو بطانة الرحم).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="extra-activities" class="my-16 scroll-mt-20 extra-content-card">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 section-title-underline animate-on-scroll" style="color: var(--neon-purple);" data-key="extra_main_title"><i class="fas fa-puzzle-piece mr-3 rtl:ml-3"></i>أنشطة ومصطلحات إضافية</h2>
+            <div class="rounded-lg p-6 md:p-8 shadow-xl relative">
+                <div class="unit-background-animation">
+                     <i class="fas fa-question-circle"></i><i class="fas fa-book-open"></i><i class="fas fa-lightbulb"></i><i class="fas fa-edit"></i> <i class="fas fa-search"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="mb-8 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.1s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-purple);" data-key="quiz_title"><i class="fas fa-pen-to-square mr-2 rtl:ml-2"></i>اختبار قصير</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-300 pr-4 rtl:pl-4">
+                            <li data-key="quiz_q1">اذكر مثالاً لتفاعل انحلال حراري ينتج عنه راسب أسود.</li>
+                            <li data-key="quiz_q2">فسر لماذا يتفاعل الصوديوم مع الماء بعنف بينما يتفاعل النحاس مع حمض الهيدروكلوريك المخفف ببطء شديد أو لا يتفاعل؟</li>
+                            <li data-key="quiz_q3">ما المقصود بتفاعل التعادل؟ واكتب معادلة كيميائية موزونة توضح هذا التفاعل.</li>
+                            <li data-key="quiz_q4">عرف العامل المؤكسد طبقاً للمفهوم الإلكتروني.</li>
+                            <li data-key="quiz_q5">اذكر عاملين يؤثران على سرعة التفاعل الكيميائي من طبيعة المتفاعلات.</li>
+                            <li data-key="quiz_q6">ما الفرق بين التيار الكهربي المستمر والتيار الكهربي المتردد من حيث الاتجاه؟</li>
+                            <li data-key="quiz_q7">اذكر نص قانون أوم.</li>
+                            <li data-key="quiz_q8">ما هي وحدة قياس الإشعاع الممتص؟ وما هو الحد الأقصى الآمن للتعرض للإشعاع سنوياً للجمهور العام؟</li>
+                            <li data-key="quiz_q9">ماذا يحدث لنخاع العظام عند التعرض لجرعة إشعاعية كبيرة في فترة زمنية قصيرة؟</li>
+                            <li data-key="quiz_q10">عرف الجين.</li>
+                        </ol>
+                        <div class="mt-4">
+                            <div class="collapsible-item">
+                                <div class="collapsible-question" style="background-color: #2a2135;"> <span data-key="quiz_answer_key_toggle" style="color: var(--neon-purple);"><i class="fas fa-key mr-2 rtl:ml-2"></i>مفتاح إجابة الاختبار القصير</span> <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="collapsible-answer" style="background-color: #1e1629;">
+                                    <ol class="list-decimal list-inside space-y-2 text-gray-400 pr-4 rtl:pl-4 text-sm">
+                                        <li data-key="quiz_a1">انحلال هيدروكسيد النحاس (II) بالحرارة: Cu(OH)₂ --(حرارة)--> CuO (راسب أسود) + H₂O.</li>
+                                        <li data-key="quiz_a2">الصوديوم يقع قبل الهيدروجين في متسلسلة النشاط الكيميائي. النحاس يقع بعد الهيدروجين.</li>
+                                        <li data-key="quiz_a3">تفاعل حمض مع قلوي لتكوين ملح وماء. مثال: HCl + NaOH --> NaCl + H₂O.</li>
+                                        <li data-key="quiz_a4">المادة التي تكتسب إلكتروناً أو أكثر أثناء التفاعل الكيميائي.</li>
+                                        <li data-key="quiz_a5">نوع الرابطة في جزيئات المتفاعلات، ومساحة سطح المتفاعلات المعرض للتفاعل.</li>
+                                        <li data-key="quiz_a6">المستمر يسري في اتجاه واحد، المتردد في اتجاهين متعاكسين.</li>
+                                        <li data-key="quiz_a7">يتناسب فرق الجهد بين طرفي موصل تناسباً طردياً مع شدة التيار المار فيه عند ثبوت درجة الحرارة.</li>
+                                        <li data-key="quiz_a8">السيفرت (Sv). الحد الآمن للجمهور: 1 ميلي سيفرت/سنة.</li>
+                                        <li data-key="quiz_a9">يحدث تدمير لنخاع العظام، مما يؤثر على تكوين خلايا الدم.</li>
+                                        <li data-key="quiz_a10">جزء من الحمض النووي (DNA) مسئول عن إظهار صفة وراثية معينة.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.2s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-purple);" data-key="essay_q_title"><i class="fas fa-book-reader mr-2 rtl:ml-2"></i>أسئلة مقالية مقترحة</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4 rtl:pr-4 text-gray-300">
+                            <li data-key="essay_q1">قارن بين تفاعلات الإحلال البسيط وتفاعلات الإحلال المزدوج مع ذكر أمثلة لكل نوع.</li>
+                            <li data-key="essay_q2">اشرح دور العوامل الحفازة في التفاعلات الكيميائية، مع التوضيح بالرسم البياني لتأثير العامل الحفاز على طاقة التنشيط.</li>
+                            <li data-key="essay_q3">وضح كيف يتم قياس كل من شدة التيار الكهربي وفرق الجهد الكهربي والمقاومة الكهربية في الدائرة الكهربية، مع ذكر الأجهزة المستخدمة وكيفية توصيلها.</li>
+                            <li data-key="essay_q4">ناقش الآثار الضارة للإشعاع النووي على الكائنات الحية، مع التمييز بين آثار التعرض لجرعة كبيرة في وقت قصير وآثار التعرض لجرعات صغيرة في وقت طويل.</li>
+                            <li data-key="essay_q5">اشرح تجربة لتوضيح القانون الأول لمندل (قانون انعزال العوامل) موضحاً الآباء والجاميتات والجيل الأول والجيل الثاني والنسب الناتجة.</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-card p-4 rounded-md animate-on-scroll" style="transition-delay: 0.3s;">
+                        <h3 class="text-2xl font-semibold mb-3" style="color: var(--neon-purple);" data-key="glossary_title"><i class="fas fa-spell-check mr-2 rtl:ml-2"></i>مسرد المصطلحات الرئيسية</h3>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-sm text-gray-300">
+                            <p data-key="glossary_term1"><strong>الانحلال الحراري:</strong> تفكك المركب بالحرارة.</p>
+                            <p data-key="glossary_term2"><strong>الإحلال البسيط:</strong> يحل عنصر محل آخر أقل نشاطاً.</p>
+                            <p data-key="glossary_term3"><strong>الإحلال المزدوج:</strong> تبادل أيوني مركبين.</p>
+                            <p data-key="glossary_term4"><strong>الأكسدة:</strong> زيادة الأكسجين أو فقد إلكترونات.</p>
+                            <p data-key="glossary_term5"><strong>الاختزال:</strong> نقص الأكسجين أو اكتساب إلكترونات.</p>
+                            <p data-key="glossary_term6"><strong>العامل المؤكسد:</strong> يمنح الأكسجين أو يكتسب إلكترونات.</p>
+                            <p data-key="glossary_term7"><strong>العامل المختزل:</strong> يسحب الأكسجين أو يفقد إلكترونات.</p>
+                            <p data-key="glossary_term8"><strong>سرعة التفاعل الكيميائي:</strong> معدل التغير في التركيز مع الزمن.</p>
+                            <p data-key="glossary_term9"><strong>العامل الحفاز:</strong> مادة تغير سرعة التفاعل دون أن تستهلك.</p>
+                            <p data-key="glossary_term10"><strong>الإنزيمات:</strong> عوامل حفازة حيوية.</p>
+                            <p data-key="glossary_term11"><strong>شدة التيار الكهربي:</strong> كمية الشحنة المارة في الثانية.</p>
+                            <p data-key="glossary_term12"><strong>فرق الجهد الكهربي:</strong> الشغل المبذول لنقل شحنة.</p>
+                            <p data-key="glossary_term13"><strong>المقاومة الكهربية:</strong> الممانعة التي يلقاها التيار.</p>
+                            <p data-key="glossary_term14"><strong>قانون أوم:</strong> العلاقة بين الجهد والتيار والمقاومة.</p>
+                            <p data-key="glossary_term15"><strong>الريوستات المنزلق:</strong> مقاومة متغيرة.</p>
+                            <p data-key="glossary_term16"><strong>التيار المستمر (DC):</strong> تيار ثابت الاتجاه.</p>
+                            <p data-key="glossary_term17"><strong>التيار المتردد (AC):</strong> تيار متغير الاتجاه والشدة.</p>
+                            <p data-key="glossary_term18"><strong>القوة الدافعة الكهربية (emf):</strong> فرق الجهد لمصدر كهربي في دائرة مفتوحة.</p>
+                            <p data-key="glossary_term19"><strong>النشاط الإشعاعي:</strong> تحول تلقائي لأنوية العناصر المشعة.</p>
+                            <p data-key="glossary_term20"><strong>العناصر المشعة:</strong> عناصر يصدر عنها إشعاع.</p>
+                            <p data-key="glossary_term21"><strong>التلوث الإشعاعي:</strong> زيادة الإشعاع في البيئة.</p>
+                            <p data-key="glossary_term22"><strong>السيفرت:</strong> وحدة قياس الإشعاع الممتص.</p>
+                            <p data-key="glossary_term23"><strong>علم الوراثة:</strong> يدرس انتقال الصفات الوراثية.</p>
+                            <p data-key="glossary_term24"><strong>الصفات الوراثية:</strong> تنتقل من جيل لآخر.</p>
+                            <p data-key="glossary_term25"><strong>الصفة السائدة:</strong> تظهر في الجيل الأول.</p>
+                            <p data-key="glossary_term26"><strong>الصفة المتنحية:</strong> تختفي في الجيل الأول.</p>
+                            <p data-key="glossary_term27"><strong>الفرد النقي:</strong> يحمل عاملين متماثلين للصفة.</p>
+                            <p data-key="glossary_term28"><strong>الفرد الهجين:</strong> يحمل عاملين مختلفين للصفة.</p>
+                            <p data-key="glossary_term29"><strong>الجاميتات:</strong> خلايا جنسية تحمل عامل واحد للصفة.</p>
+                            <p data-key="glossary_term30"><strong>الكروموسوم:</strong> تركيب يحمل الجينات في النواة.</p>
+                            <p data-key="glossary_term31"><strong>الحمض النووي (DNA):</strong> يحمل المعلومات الوراثية.</p>
+                            <p data-key="glossary_term32"><strong>الجين:</strong> جزء من DNA مسئول عن صفة.</p>
+                            <p data-key="glossary_term33"><strong>مشروع الجينوم البشري:</strong> خريطة الجينات البشرية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-10 text-center border-t border-gray-700">
+        <div class="container mx-auto px-6">
+            <i class="fas fa-graduation-cap text-3xl text-sky-500 mb-3"></i>
+            <p data-key="footer_text">يا رب تكون الرحلة دي كانت ممتعة ومفيدة ليك! عالم العلوم كبير وجميل ومليان حاجات نكتشفها سوا!</p>
+            <p class="text-sm mt-2" data-key="footer_copyright">&copy; <span id="currentYear"></span> جميع الحقوق محفوظة لرحلة العلوم.</p>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // --- Translations Object ---
+        const translations = {
+            "page_title": { "ar": "رحلة ممتعة في عالم العلوم", "en": "A Fun Journey into the World of Science" },
+            "loader_text": { "ar": "لحظات وننطلق في رحلة العلوم!", "en": "Moments and we'll embark on the science journey!" },
+            "header_title": { "ar": "رحلة ممتعة في عالم العلوم", "en": "A Fun Journey into the World of Science" },
+            "header_subtitle": { "ar": "استكشف ألغاز الكون معنا بطريقة شيقة ومبسطة!", "en": "Explore the mysteries of the universe with us in an exciting and simple way!" },
+            "nav_brand_jannah": { "ar": "Jannah Science", "en": "Jannah Science" },
+            "nav_unit1": { "ar": "الوحدة الأولى: الكيمياء", "en": "Unit 1: Chemistry" },
+            "nav_unit2": { "ar": "الوحدة الثانية: الكهرباء والذرة", "en": "Unit 2: Electricity & Atom" },
+            "nav_unit3": { "ar": "الوحدة الثالثة: الوراثة", "en": "Unit 3: Genetics & Hormones" },
+            "nav_extra": { "ar": "أنشطة إضافية", "en": "Extra Activities" },
+            "nav_unit1_mobile": { "ar": "الوحدة الأولى: الكيمياء", "en": "Unit 1: Chemistry" },
+            "nav_unit2_mobile": { "ar": "الوحدة الثانية: الكهرباء والذرة", "en": "Unit 2: Electricity & Atom" },
+            "nav_unit3_mobile": { "ar": "الوحدة الثالثة: الوراثة", "en": "Unit 3: Genetics & Hormones" },
+            "nav_extra_mobile": { "ar": "أنشطة إضافية", "en": "Extra Activities" },
+            "intro_text": { "ar": "أهلاً يا بطل العلوم الصغير! مستعدين نبدأ رحلة ممتعة جداً في عالم العلوم مع بعض؟ تخيل معايا إننا هنكتشف حاجات جديدة ومثيرة، كأننا محققين صغار بنحل ألغاز الكون! كل اللي هنقوله ده جاي من المصادر اللي عندك بالظبط، وهنحاول نخليه بسيط وممتع كأنك بتلعب!", "en": "Hello, little science hero! Ready to start a very fun journey into the world of science together? Imagine we're discovering new and exciting things, like little detectives solving the universe's mysteries! Everything we say comes exactly from your sources, and we'll try to make it simple and fun, like you're playing a game!" },
+            
+            "unit1_main_title": { "ar": "الوحدة الأولى: التفاعلات الكيميائية", "en": "Unit 1: Chemical Reactions" },
+            "unit1_intro_detailed_full": { "ar": "التفاعل الكيميائي هو عملية بتتضمن تكسير الروابط الموجودة في جزيئات المواد المتفاعلة (الرياكتانتس)، وتكوين روابط جديدة في جزيئات المواد الناتجة من التفاعل (البرودكتس). المواد اللي دخلت التفاعل الكيميائي دي اسمها رياكتانتس.", "en": "A chemical reaction is a process that involves breaking bonds in the molecules of reactants and forming new bonds in the molecules of products. The substances that enter a chemical reaction are called reactants." },
+            "unit1_importance_title_full": { "ar": "أهمية التفاعلات الكيميائية", "en": "Importance of Chemical Reactions" },
+            "unit1_importance1_full": { "ar": "احتراق الوقود في السيارات.", "en": "Burning fuel in cars." },
+            "unit1_importance2_full": { "ar": "البناء الضوئي في النباتات.", "en": "Photosynthesis in plants." },
+            "unit1_importance3_full": { "ar": "صناعة الأدوية، الأسمدة، والألياف الصناعية.", "en": "Manufacturing medicines, fertilizers, and synthetic fibers." },
+            "unit1_types_title_full": { "ar": "أنواع التفاعلات الكيميائية", "en": "Types of Chemical Reactions" },
+            "unit1_type_thermal_full": { "ar": "1. الانحلال الحراري (Thermal Decomposition)", "en": "1. Thermal Decomposition" },
+            "unit1_type_thermal_desc_detailed_full": { "ar": "تفكك المركب بالحرارة إلى مكوناته الأساسية أو مركبات أبسط منه. رمز التسخين في المعادلات هو مثلث صغير فوق السهم.", "en": "Decomposition of a compound by heat into its basic components or simpler compounds. The symbol for heating in equations is a small triangle above the arrow." },
+            "unit1_thermal_metal_oxides_full": { "ar": "<strong>أكسيد الفلزات:</strong> يتفكك أكسيد الفلز بالحرارة إلى الفلز والأكسجين. مثال: <span class=\"equation\">2HgO <span class=\"text-red-400\">(أحمر)</span> --(حرارة)--> 2Hg <span class=\"text-gray-400\">(فضي)</span> + O₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>", "en": "<strong>Metal Oxides:</strong> Decompose by heat into the metal and oxygen. Example: <span class=\"equation\">2HgO <span class=\"text-red-400\">(red)</span> --(heat)--> 2Hg <span class=\"text-gray-400\">(silver)</span> + O₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>" },
+            "unit1_thermal_metal_hydroxides_full": { "ar": "<strong>هيدروكسيد الفلزات:</strong> يتفكك هيدروكسيد الفلز بالحرارة إلى أكسيد الفلز وبخار الماء. مثال: <span class=\"equation\">Cu(OH)₂ <span class=\"text-blue-400\">(أزرق)</span> --(حرارة)--> CuO <span class=\"text-gray-700\">(أسود)</span> + H₂O <i class=\"fas fa-arrow-up text-xs\"></i></span>", "en": "<strong>Metal Hydroxides:</strong> Decompose by heat into metal oxide and water vapor. Example: <span class=\"equation\">Cu(OH)₂ <span class=\"text-blue-400\">(blue)</span> --(heat)--> CuO <span class=\"text-gray-700\">(black)</span> + H₂O <i class=\"fas fa-arrow-up text-xs\"></i></span>" },
+            "unit1_thermal_metal_carbonates_full": { "ar": "<strong>كربونات الفلزات:</strong> تتفكك كربونات الفلز بالحرارة إلى أكسيد الفلز وغاز ثاني أكسيد الكربون (يعكر ماء الجير). مثال: <span class=\"equation\">CuCO₃ <span class=\"text-green-400\">(أخضر)</span> --(حرارة)--> CuO <span class=\"text-gray-700\">(أسود)</span> + CO₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>", "en": "<strong>Metal Carbonates:</strong> Decompose by heat into metal oxide and carbon dioxide (turns limewater cloudy). Example: <span class=\"equation\">CuCO₃ <span class=\"text-green-400\">(green)</span> --(heat)--> CuO <span class=\"text-gray-700\">(black)</span> + CO₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>" },
+            "unit1_thermal_metal_sulfates_full": { "ar": "<strong>كبريتات الفلزات:</strong> تتفكك كبريتات الفلز بالحرارة إلى أكسيد الفلز وثالث أكسيد الكبريت. مثال: <span class=\"equation\">CuSO₄ <span class=\"text-blue-400\">(أزرق)</span> --(حرارة)--> CuO <span class=\"text-gray-700\">(أسود)</span> + SO₃ <i class=\"fas fa-arrow-up text-xs\"></i></span>", "en": "<strong>Metal Sulfates:</strong> Decompose by heat into metal oxide and sulfur trioxide. Example: <span class=\"equation\">CuSO₄ <span class=\"text-blue-400\">(blue)</span> --(heat)--> CuO <span class=\"text-gray-700\">(black)</span> + SO₃ <i class=\"fas fa-arrow-up text-xs\"></i></span>" },
+            "unit1_thermal_metal_nitrates_full": { "ar": "<strong>نترات الفلزات:</strong> تتفكك نترات الفلز بالحرارة إلى نيتريت الفلز والأكسجين. مثال: <span class=\"equation\">2NaNO₃ <span class=\"text-gray-300\">(أبيض)</span> --(حرارة)--> 2NaNO₂ <span class=\"text-yellow-200\">(أبيض مصفر)</span> + O₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>", "en": "<strong>Metal Nitrates:</strong> Decompose by heat into metal nitrite and oxygen. Example: <span class=\"equation\">2NaNO₃ <span class=\"text-gray-300\">(white)</span> --(heat)--> 2NaNO₂ <span class=\"text-yellow-200\">(yellowish white)</span> + O₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>" },
+            "unit1_type_substitution_full": { "ar": "2. الإحلال (Substitution)", "en": "2. Substitution" },
+            "unit1_type_substitution_desc_detailed_full": { "ar": "تفاعل يتم فيه تبديل عنصر محل عنصر آخر (الأكثر نشاطاً يحل محل الأقل نشاطاً حسب متسلسلة النشاط الكيميائي).", "en": "A reaction in which one element replaces another (the more active replaces the less active according to the chemical activity series)." },
+            "unit1_sub_simple_title_full": { "ar": "<strong>أ. إحلال بسيط:</strong> يحل عنصر نشط محل عنصر أقل نشاطاً في أحد محاليل مركباته.", "en": "<strong>A. Simple Substitution:</strong> A more reactive element replaces a less reactive one in one of its compound solutions." },
+            "unit1_sub_simple_water_full": { "ar": "فلز محل هيدروجين الماء: <span class=\"equation\">2Na + 2H₂O --> 2NaOH + H₂ <i class=\"fas fa-arrow-up text-xs\"></i> + حرارة</span> (يشتعل بفرقعه).", "en": "Metal replacing hydrogen of water: <span class=\"equation\">2Na + 2H₂O --> 2NaOH + H₂ <i class=\"fas fa-arrow-up text-xs\"></i> + heat</span> (burns with a pop sound)." },
+            "unit1_sub_simple_acid_full": { "ar": "فلز محل هيدروجين الحمض المخفف: <span class=\"equation\">Zn + 2HCl --> ZnCl₂ + H₂ <i class=\"fas fa-arrow-up text-xs\"></i></span> (النحاس لا يتفاعل).", "en": "Metal replacing hydrogen of dilute acid: <span class=\"equation\">Zn + 2HCl --> ZnCl₂ + H₂ <i class=\"fas fa-arrow-up text-xs\"></i></span> (Copper does not react)." },
+            "unit1_sub_simple_metal_full": { "ar": "فلز محل فلز آخر في محلول أحد أملاحه: <span class=\"equation\">Mg + CuSO₄ <span class=\"text-blue-400\">(أزرق)</span> --> MgSO₄ <span class=\"text-gray-400\">(عديم اللون)</span> + Cu <span class=\"text-red-500\">(راسب أحمر)</span></span>", "en": "Metal replacing another metal in its salt solution: <span class=\"equation\">Mg + CuSO₄ <span class=\"text-blue-400\">(blue)</span> --> MgSO₄ <span class=\"text-gray-400\">(colorless)</span> + Cu <span class=\"text-red-500\">(red precipitate)</span></span>" },
+            "unit1_sub_double_title_full": { "ar": "<strong>ب. إحلال مزدوج:</strong> يتم فيه تبادل مزدوج بين شقي (أيونات) مركبين مختلفين لتكوين مركبين جديدين.", "en": "<strong>B. Double Substitution:</strong> A double exchange between the ions of two different compounds to form two new compounds." },
+            "unit1_sub_double_acid_alkali_full": { "ar": "حمض مع قلوي (التعادل): <span class=\"equation\">HCl + NaOH --> NaCl + H₂O</span>", "en": "Acid with alkali (Neutralization): <span class=\"equation\">HCl + NaOH --> NaCl + H₂O</span>" },
+            "unit1_sub_double_acid_salt_full": { "ar": "حمض مع ملح كربونات: <span class=\"equation\">2HCl + Na₂CO₃ --> 2NaCl + H₂O + CO₂ <i class=\"fas fa-arrow-up text-xs\"></i></span> (يعكر ماء الجير).", "en": "Acid with carbonate salt: <span class=\"equation\">2HCl + Na₂CO₃ --> 2NaCl + H₂O + CO₂ <i class=\"fas fa-arrow-up text-xs\"></i></span> (turns limewater cloudy)." },
+            "unit1_sub_double_salt_salt_full": { "ar": "محلول ملح مع محلول ملح آخر: <span class=\"equation\">NaCl + AgNO₃ --> NaNO₃ + AgCl <span class=\"text-gray-400\">(راسب أبيض)</span></span>", "en": "Salt solution with another salt solution: <span class=\"equation\">NaCl + AgNO₃ --> NaNO₃ + AgCl <span class=\"text-gray-400\">(white precipitate)</span></span>" },
+            "unit1_type_redox_full": { "ar": "3. الأكسدة والاختزال (Oxidation and Reduction)", "en": "3. Oxidation and Reduction" },
+            "unit1_redox_traditional_title_full": { "ar": "المفهوم التقليدي:", "en": "Traditional Concept:" },
+            "unit1_redox_trad_oxidation_full": { "ar": "الأكسدة: هي عملية كيميائية تؤدي إلى زيادة نسبة الأكسجين أو نقص نسبة الهيدروجين في المادة.", "en": "Oxidation: A chemical process involving an increase in the oxygen content or a decrease in the hydrogen content of a substance." },
+            "unit1_redox_trad_reduction_full": { "ar": "الاختزال: هي عملية كيميائية تؤدي إلى نقص نسبة الأكسجين أو زيادة نسبة الهيدروجين في المادة.", "en": "Reduction: A chemical process involving a decrease in the oxygen content or an increase in the hydrogen content of a substance." },
+            "unit1_redox_trad_oxidizing_agent": { "ar": "العامل المؤكسد: المادة التي تمنح الأكسجين أو تسحب الهيدروجين.", "en": "Oxidizing Agent: The substance that gives oxygen or removes hydrogen during the reaction." },
+            "unit1_redox_trad_reducing_agent": { "ar": "العامل المختزل: المادة التي تسحب الأكسجين أو تمنح الهيدروجين.", "en": "Reducing Agent: The substance that gives hydrogen or removes oxygen during the reaction." },
+            "unit1_redox_trad_example_full": { "ar": "مثال: <span class=\"equation\">CuO + H₂ --(حرارة)--> Cu + H₂O</span> (H₂ حدث له أكسدة، CuO حدث له اختزال. H₂ عامل مختزل، CuO عامل مؤكسد).", "en": "Example: <span class=\"equation\">CuO + H₂ --(heat)--> Cu + H₂O</span> (H₂ is oxidized, CuO is reduced. H₂ is a reducing agent, CuO is an oxidizing agent)." },
+            "unit1_redox_electronic_title_full": { "ar": "المفهوم الإلكتروني:", "en": "Electronic Concept:" },
+            "unit1_redox_elec_oxidation_full": { "ar": "الأكسدة: هي عملية كيميائية تفقد فيها الذرة إلكتروناً أو أكثر.", "en": "Oxidation: A chemical process in which an atom or ion loses one or more electrons." },
+            "unit1_redox_elec_reduction_full": { "ar": "الاختزال: هي عملية كيميائية تكتسب فيها الذرة إلكتروناً أو أكثر.", "en": "Reduction: A chemical process in which an atom or ion gains one or more electrons." },
+            "unit1_redox_elec_oxidizing_agent": { "ar": "العامل المؤكسد: هو المادة اللي بتكتسب إلكتروناً أو أكثر (بيحصل لها اختزال).", "en": "Oxidizing Agent: The substance that gains one or more electrons (undergoes reduction)." },
+            "unit1_redox_elec_reducing_agent": { "ar": "العامل المختزل: هو المادة اللي بتفقد إلكتروناً أو أكثر (بيحصل لها أكسدة).", "en": "Reducing Agent: The substance that loses one or more electrons (undergoes oxidation)." },
+            "unit1_redox_elec_example_full": { "ar": "مثال: <span class=\"equation\">2Na + Cl₂ --> 2NaCl</span> (Na فقد إلكترون (أكسدة)، Cl اكتسب إلكترون (اختزال). Na عامل مختزل، Cl₂ عامل مؤكسد).", "en": "Example: <span class=\"equation\">2Na + Cl₂ --> 2NaCl</span> (Na lost an electron (oxidation), Cl gained an electron (reduction). Na is a reducing agent, Cl₂ is an oxidizing agent)." },
+            "unit1_speed_title_full": { "ar": "سرعة التفاعل الكيميائي", "en": "Rate of Chemical Reaction" },
+            "unit1_speed_definition_full": { "ar": "معدل التغير في تركيز المتفاعلات والنواتج في وحدة الزمن. يمكن قياسه بمعدل اختفاء أحد المتفاعلات أو ظهور أحد النواتج.", "en": "The rate of change in the concentration of reactants and products per unit of time. It can be measured by the rate of disappearance of a reactant or the rate of appearance of a product." },
+            "unit1_speed_factors_title_full": { "ar": "العوامل المؤثرة على سرعة التفاعل الكيميائي:", "en": "Factors Affecting the Rate of Chemical Reaction:" },
+            "unit1_factor_nature_detailed_full": { "ar": "<strong>طبيعة المواد المتفاعلة:</strong><br> أ. نوع الرابطة: المركبات الأيونية تفاعلاتها سريعة، التساهمية بطيئة.<br> ب. مساحة سطح المتفاعلات: كلما زادت مساحة السطح، زادت سرعة التفاعل.", "en": "<strong>Nature of Reactants:</strong><br> A. Type of Bonding: Ionic compounds react faster than covalent compounds.<br> B. Surface Area of Reactants: The larger the surface area, the faster the reaction." },
+            "unit1_factor_concentration_detailed_full": { "ar": "<strong>تركيز المتفاعلات:</strong> كلما زاد تركيز المواد المتفاعلة، زادت سرعة التفاعل الكيميائي بسبب زيادة عدد التصادمات المحتملة بين الجزيئات.", "en": "<strong>Concentration of Reactants:</strong> The higher the concentration of reactants, the faster the chemical reaction due to an increased number of potential collisions between molecules." },
+            "unit1_factor_temp_detailed_full": { "ar": "<strong>درجة حرارة التفاعل:</strong> كلما زادت درجة الحرارة، زادت سرعة التفاعل الكيميائي بسبب زيادة سرعة الجزيئات وبالتالي زيادة عدد التصادمات القوية.", "en": "<strong>Temperature of the Reaction:</strong> The higher the temperature, the faster the chemical reaction due to increased molecular speed and thus more frequent and energetic collisions." },
+            "unit1_factor_catalyst_detailed_full": { "ar": "<strong>العوامل الحفازة والإنزيمات:</strong><br> العامل الحفاز: مادة كيميائية تغير من سرعة التفاعل الكيميائي دون أن تستهلك فيه (موجب يزيد، سالب يقلل).<br> الإنزيمات: عوامل حفازة حيوية تزيد من سرعة التفاعلات البيولوجية داخل الكائنات الحية.", "en": "<strong>Catalysts and Enzymes:</strong><br> Catalyst: A chemical substance that changes the rate of a chemical reaction without being consumed (positive increases, negative decreases).<br> Enzymes: Biological catalysts that increase the rate of biological reactions within living organisms." },
+            "unit1_app_airbag_title_detailed_full": { "ar": "تطبيق: الوسادة الهوائية (الإيرباج) والمحول الحفزي", "en": "Application: Airbag and Catalytic Converter" },
+            "unit1_app_airbag_desc_detailed_full": { "ar": "<strong>الإيرباج:</strong> مادة أزيد الصوديوم (NaN₃) تتفكك بالشرر الكهربي سريعاً لغاز نيتروجين يملأ الوسادة. <span class=\"equation\">2NaN₃ --(شرر كهربي)--> 2Na + 3N₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>", "en": "<strong>Airbag:</strong> Sodium azide (NaN₃) rapidly decomposes by electric spark to nitrogen gas, inflating the bag. <span class=\"equation\">2NaN₃ --(electric spark)--> 2Na + 3N₂ <i class=\"fas fa-arrow-up text-xs\"></i></span>" },
+            "unit1_app_catalytic_converter_full": { "ar": "<strong>المحول الحفزي:</strong> علبة معدنية في السيارات الحديثة تعالج الغازات الضارة الناتجة من المحرك باستخدام عوامل حفازة (بلاتين، إيريديوم، بلاديوم) وتحولها لغازات أقل ضرراً.", "en": "<strong>Catalytic Converter:</strong> A metal canister in modern cars that treats harmful gases from the engine using catalysts (platinum, iridium, palladium) and converts them into less harmful gases." },
+            
+            "unit2_main_title_detailed": { "ar": "الوحدة الثانية: الطاقة الكهربية والنشاط الإشعاعي", "en": "Unit 2: Electric Energy & Radioactivity" },
+            "unit2_electricity_title_detailed_full": { "ar": "الخصائص الفيزيائية للتيار الكهربي", "en": "Physical Properties of Electric Current" },
+            "unit2_current_intensity_detailed_full": { "ar": "كمية الشحنة الكهربية (Q) التي تمر عبر مقطع موصل في الثانية الواحدة (t). القانون: I = Q / t. وحدة القياس: الأمبير (A). جهاز القياس: الأميتر (يوصل على التوالي).", "en": "The amount of electric charge (Q) that flows through a cross-section of a conductor in one second (t). Formula: I = Q / t. Unit: Ampere (A). Measuring device: Ammeter (connected in series)." },
+            "unit2_potential_difference_detailed_full": { "ar": "الشغل المبذول (W) لنقل كمية من الشحنة الكهربية (Q) مقدارها واحد كولوم بين نقطتين في موصل. القانون: V = W / Q. وحدة القياس: الفولت (V). جهاز القياس: الفولتميتر (يوصل على التوازي).", "en": "The work done (W) to transfer a quantity of electric charge (Q) of one Coulomb between two points in a conductor. Formula: V = W / Q. Unit: Volt (V). Measuring device: Voltmeter (connected in parallel)." },
+            "unit2_resistance_detailed_full": { "ar": "الممانعة التي يلقاها التيار الكهربي أثناء مروره في الموصل. وحدة القياس: الأوم (Ω). جهاز القياس: الأوميتر. الريوستات المنزلق: مقاومة متغيرة للتحكم في شدة التيار وفرق الجهد.", "en": "The opposition encountered by the electric current while passing through a conductor. Unit: Ohm (Ω). Measuring device: Ohmmeter. Sliding Rheostat: A variable resistance used to control current intensity and potential difference." },
+            "unit2_ohms_law_title_detailed_full": { "ar": "قانون أوم:", "en": "Ohm's Law:" },
+            "unit2_ohms_law_formula_detailed_full": { "ar": "يتناسب فرق الجهد بين طرفي موصل تناسباً طردياً مع شدة التيار المار فيه عند ثبوت درجة الحرارة. (R = V / I).", "en": "The potential difference across a conductor is directly proportional to the current flowing through it at a constant temperature. (R = V / I)." },
+            "unit2_sources_title_detailed_full": { "ar": "التيار الكهربي والمصادر الكهربية", "en": "Electric Current and Electrical Sources" },
+            "unit2_dc_current_title_full": { "ar": "التيار المستمر (DC)", "en": "Direct Current (DC)" },
+            "unit2_dc_current_desc_full": { "ar": "تيار كهربي ثابت الشدة يسري في اتجاه واحد فقط في الدائرة الكهربية. المصدر: الخلايا الكهروكيميائية (البطاريات). الاستخدامات: الطلاء الكهربي، تشغيل بعض الأجهزة الكهربية الصغيرة.", "en": "An electric current of constant intensity that flows in one direction only in the electric circuit. Source: Electrochemical cells (batteries). Uses: Electroplating, operating some small electrical appliances." },
+            "unit2_ac_current_title_full": { "ar": "التيار المتردد (AC)", "en": "Alternating Current (AC)" },
+            "unit2_ac_current_desc_full": { "ar": "تيار كهربي متغير الشدة والاتجاه يسري في اتجاهين متعاكسين في الدائرة الكهربية. المصدر: المولدات الكهربية (الدينامو). الاستخدامات: إنارة المنازل والشوارع، تشغيل معظم الأجهزة الكهربية، يمكن نقله لمسافات طويلة ويمكن تحويله إلى تيار مستمر.", "en": "An electric current of variable intensity and direction that flows in two opposite directions in the electric circuit. Source: Electric generators (dynamos). Uses: Lighting homes and streets, operating most electrical appliances, can be transmitted over long distances and converted to direct current." },
+            "unit2_connection_title_detailed_full": { "ar": "توصيل الخلايا الكهربية", "en": "Connecting Electric Cells" },
+            "unit2_emf_intro": { "ar": "القوة الدافعة الكهربية (emf): فرق الجهد بين طرفي المصدر الكهربي في الدائرة المفتوحة.", "en": "Electromotive Force (emf): The potential difference across the terminals of an electrical source in an open circuit." },
+            "unit2_connection_series_title_detailed_full": { "ar": "توصيل على التوالي", "en": "Series Connection" },
+            "unit2_connection_series_desc_detailed_full": { "ar": "القوة الدافعة الكلية = مجموع القوى الدافعة للخلايا.", "en": "Total electromotive force = sum of the EMFs of the cells." },
+            "unit2_connection_parallel_title_detailed_full": { "ar": "توصيل على التوازي (خلايا متماثلة)", "en": "Parallel Connection (Identical Cells)" },
+            "unit2_connection_parallel_desc_detailed_full": { "ar": "القوة الدافعة الكلية = القوة الدافعة لخلية واحدة.", "en": "Total electromotive force = EMF of a single cell." },
+            "unit2_radioactivity_title_detailed_full": { "ar": "النشاط الإشعاعي والطاقة النووية", "en": "Radioactivity and Nuclear Energy" },
+            "unit2_radioactivity_intro_detailed_full": { "ar": "النشاط الإشعاعي: عملية تحول تلقائي لأنوية ذرات بعض العناصر المشعة الموجودة في الطبيعة كمحاولة للوصول إلى تركيب أكثر استقراراً، وذلك بإصدار إشعاعات غير مرئية (ألفا، بيتا، جاما). العناصر المشعة تحتوي أنوية ذراتها على عدد من النيوترونات يزيد عن العدد اللازم لاستقرارها. اكتشفه العالم هنري بيكريل.", "en": "Radioactivity: A spontaneous transformation process of the nuclei of some radioactive elements found in nature in an attempt to reach a more stable structure, by emitting invisible radiation (alpha, beta, gamma). Radioactive elements have nuclei with more neutrons than needed for stability. Discovered by Henri Becquerel." },
+            "unit2_artificial_radioactivity_desc": { "ar": "النشاط الإشعاعي الصناعي: الإشعاع الناتج عن التفاعلات النووية التي تتم في المفاعلات النووية أو القنابل الذرية.", "en": "Artificial Radioactivity: Radiation resulting from nuclear reactions in nuclear reactors or atomic bombs." },
+            "unit2_peaceful_uses_title_detailed_full": { "ar": "الاستخدامات السلمية للطاقة النووية:", "en": "Peaceful Uses of Nuclear Energy:" },
+            "unit2_peaceful_electricity_full": { "ar": "مجال توليد الكهرباء: استخدام الطاقة الحرارية الناتجة من المفاعلات النووية في تسخين الماء لإنتاج البخار اللازم لإدارة التوربينات.", "en": "Electricity Generation: Using thermal energy from nuclear reactors to heat water, producing steam to drive turbines." },
+            "unit2_peaceful_space_full": { "ar": "مجال استكشاف الفضاء: استخدام الوقود النووي لإطلاق المكوك الفضائي.", "en": "Space Exploration: Using nuclear fuel to launch space shuttles." },
+            "unit2_peaceful_industry_full": { "ar": "مجال الصناعة: الكشف عن عيوب المنتجات، تحويل الرمال إلى شرائح سيليكون.", "en": "Industry: Detecting product defects, converting sand into silicon wafers." },
+            "unit2_peaceful_medicine_full": { "ar": "مجال الطب: تشخيص وعلاج بعض الأمراض مثل السرطان.", "en": "Medicine: Diagnosing and treating diseases like cancer." },
+            "unit2_peaceful_agriculture_full": { "ar": "مجال الزراعة: القضاء على الآفات الزراعية، تحسين سلالات بعض النباتات.", "en": "Agriculture: Pest control, improving plant strains." },
+            "unit2_peaceful_exploration_full": { "ar": "مجال التنقيب: الكشف عن مصادر المياه الجوفية والبترول.", "en": "Exploration: Detecting groundwater and oil sources." },
+            "unit2_pollution_title_detailed_full": { "ar": "التلوث الإشعاعي وآثاره", "en": "Radioactive Pollution and Its Effects" },
+            "unit2_pollution_sources_full": { "ar": "مصادر التلوث الإشعاعي: مصادر طبيعية (الإشعاع الكوني، النظائر المشعة في البيئة)، مصادر صناعية (تجارب القنابل الذرية، النفايات المشعة من المفاعلات).", "en": "Sources of Radioactive Pollution: Natural (cosmic radiation, environmental radioactive isotopes), Artificial (atomic bomb tests, radioactive waste from nuclear reactors)." },
+            "unit2_pollution_large_dose_detailed_full": { "ar": "<strong>التعرض لجرعة إشعاعية كبيرة في فترة زمنية قصيرة:</strong> تدمير نخاع العظام، تدمير الجهاز الهضمي، تدمير الجهاز العصبي المركزي، تدمير الطحال. قد يؤدي إلى الوفاة.", "en": "<strong>Exposure to a large radiation dose in a short time:</strong> Destruction of bone marrow, digestive system, central nervous system, spleen. May lead to death." },
+            "unit2_pollution_small_dose_detailed_full": { "ar": "<strong>التعرض لجرعات إشعاعية صغيرة في فترة زمنية طويلة:</strong> آثار بدنية (مثل سرطان الجلد)، آثار وراثية (تغيرات في الكروموسومات تؤدي إلى ولادة أطفال مشوهين)، آثار خلوية (تغير في تركيب الخلية مثل تغير تركيب الهيموجلوبين).", "en": "<strong>Exposure to small radiation doses over a long time:</strong> Physical effects (e.g., skin cancer), genetic effects (changes in chromosomes leading to birth defects), cellular effects (changes in cell structure, e.g., hemoglobin structure)." },
+            "unit2_pollution_unit_safe_dose_full": { "ar": "وحدة قياس الإشعاع الممتص: السيفرت (Sv). الميلي سيفرت = 10⁻³ سيفرت. الحد الأقصى الآمن للعاملين: 20 ميلي سيفرت/سنة. للجمهور العام: 1 ميلي سيفرت/سنة.", "en": "Unit of absorbed radiation: Sievert (Sv). Millisievert = 10⁻³ Sievert. Maximum safe dose for workers: 20 mSv/year. For the general public: 1 mSv/year." },
+            "unit2_pollution_prevention_full": { "ar": "طرق الوقاية من التلوث الإشعاعي: ارتداء ملابس واقية، وضع مصادر الإشعاع في حوائط سميكة من الرصاص أو الخرسانة، دفن النفايات المشعة بعيداً عن البيئة، مراعاة قواعد الأمان.", "en": "Methods of protection from radioactive pollution: Wearing protective clothing, placing radiation sources in thick lead or concrete walls, burying radioactive waste far from the environment, observing safety rules." },
+
+            "unit3_main_title_detailed_full": { "ar": "الوحدة الثالثة: مبادئ الوراثة والتنوع الأحيائي", "en": "Unit 3: Principles of Inheritance and Biodiversity" },
+            "unit3_intro_detailed_full": { "ar": "علم الوراثة هو العلم الذي يفسر كيفية انتقال الصفات الوراثية من جيل إلى جيل آخر. الصفات الوراثية هي الصفات التي تنتقل من الآباء إلى الأبناء، أما الصفات المكتسبة فهي الصفات غير القابلة للانتقال.", "en": "Genetics is the science that explains how hereditary traits are transmitted from one generation to another. Hereditary traits are those passed from parents to offspring, while acquired traits are not transmissible." },
+            "unit3_mendel_title_detailed_full": { "ar": "قوانين مندل", "en": "Mendel's Laws" },
+            "unit3_mendel_concept_full": { "ar": "تتحكم في كل صفة وراثية عاملين وراثيين (جينين) أحدهما من الأب والآخر من الأم.", "en": "Each hereditary trait is controlled by two genetic factors (genes), one from the father and one from the mother." },
+            "unit3_mendel_dominant_recessive_full": { "ar": "<strong>الصفة السائدة:</strong> الصفة التي تظهر في الجيل الأول عند تزاوج فردين يحمل أحدهما الصفة السائدة النقية والآخر الصفة المتنحية. <strong>الصفة المتنحية:</strong> الصفة التي تختفي في الجيل الأول وتظهر في الجيل الثاني بنسبة قليلة.", "en": "<strong>Dominant Trait:</strong> The trait that appears in the first generation when two individuals are crossed, one carrying the pure dominant trait and the other the recessive trait. <strong>Recessive Trait:</strong> The trait that disappears in the first generation and reappears in the second generation in a smaller ratio." },
+            "unit3_mendel_pure_hybrid_full": { "ar": "<strong>الفرد النقي:</strong> الفرد الذي يحمل عاملين وراثيين متماثلين للصفة (TT أو tt). <strong>الفرد الهجين:</strong> الفرد الذي يحمل عاملين وراثيين مختلفين للصفة (Tt).", "en": "<strong>Pure Individual:</strong> An individual carrying two identical genetic factors for a trait (TT or tt). <strong>Hybrid Individual:</strong> An individual carrying two different genetic factors for a trait (Tt)." },
+            "unit3_mendel_gametes": { "ar": "<strong>الجاميتات:</strong> الخلايا الجنسية التي تحمل نصف عدد الكروموسومات وتحتوي على عامل وراثي واحد لكل صفة.", "en": "<strong>Gametes:</strong> Sex cells that carry half the number of chromosomes and contain one genetic factor for each trait." },
+            "unit3_mendel_law1_title_detailed_full": { "ar": "القانون الأول لمندل (قانون انعزال العوامل):", "en": "Mendel's First Law (Law of Segregation of Factors):" },
+            "unit3_mendel_law1_desc_detailed_full": { "ar": "عند تزاوج فردين نقيين مختلفين في زوج من الصفات المتضادة، تورث صفة أحد الأبوين فقط في الجيل الأول (الصفة السائدة)، ثم تورث الصفة السائدة والمتنحية معاً في الجيل الثاني بنسبة 3 : 1.", "en": "When two pure individuals differing in a pair of contrasting traits are crossed, only one parent's trait (the dominant trait) is inherited in the first generation, then both the dominant and recessive traits are inherited together in the second generation in a 3:1 ratio." },
+            "unit3_mendel_law2_title_full": { "ar": "القانون الثاني لمندل (قانون التوزيع الحر للعوامل):", "en": "Mendel's Second Law (Law of Independent Assortment of Factors):" },
+            "unit3_mendel_law2_desc_full": { "ar": "عند تزاوج فردين نقيين مختلفين في زوجين أو أكثر من الصفات المتضادة، تورث صفة كل زوج مستقلة عن صفة الزوج الآخر وتظهر في الجيل الثاني بنسب محددة.", "en": "When two pure individuals differing in two or more pairs of contrasting traits are crossed, the inheritance of each pair of traits is independent of the other pair and appears in the second generation in specific ratios." },
+            "unit3_human_traits_title_detailed_full": { "ar": "الصفات الوراثية في الإنسان", "en": "Hereditary Traits in Humans" },
+            "unit3_human_traits_examples_detailed_full": { "ar": "أمثلة للصفات السائدة: القدرة على لف اللسان، شحمة الأذن الحرة، الشعر المجعد، الشعر الأسود، العيون الواسعة، العيون البنية، وجود النمش. أمثلة للصفات المتنحية: عكسها.", "en": "Examples of dominant traits: Ability to roll the tongue, free earlobes, curly hair, black hair, wide eyes, brown eyes, presence of freckles. Examples of recessive traits: The opposite." },
+            "unit3_dna_genes_title_full": { "ar": "الكروموسومات والجينات والحمض النووي (DNA)", "en": "Chromosomes, Genes, and DNA" },
+            "unit3_chromosome_desc_full": { "ar": "<strong>الكروموسوم:</strong> تركيب يوجد داخل نواة الخلية ويتكون كيميائياً من حمض نووي يسمى DNA مرتبط مع بروتين.", "en": "<strong>Chromosome:</strong> A structure found inside the cell nucleus, chemically composed of a nucleic acid called DNA associated with protein." },
+            "unit3_dna_desc_full": { "ar": "<strong>الحمض النووي (DNA):</strong> يحمل المعلومات الوراثية للكائن الحي في صورة جينات. يتكون من شريطين ملتفين حول بعضهما في شكل حلزون مزدوج.", "en": "<strong>DNA (Deoxyribonucleic Acid):</strong> Carries the genetic information of the organism in the form of genes. It consists of two strands coiled around each other in a double helix shape." },
+            "unit3_gene_desc_full": { "ar": "<strong>الجينات (Genes):</strong> أجزاء من الحمض النووي (DNA) موجودة على الكروموسومات، تحمل تعليمات بناء بروتين معين مسئول عن إظهار صفة وراثية محددة.", "en": "<strong>Genes:</strong> Segments of DNA located on chromosomes, carrying instructions for building a specific protein responsible for expressing a particular hereditary trait." },
+            "unit3_gene_role_full": { "ar": "دور الجينات في إظهار الصفات الوراثية: كل جين يعطي تعليمة لبناء بروتين، وهذا البروتين يتفاعل مع مواد أخرى لإظهار الصفة الوراثية.", "en": "Role of genes in expressing hereditary traits: Each gene gives an instruction to build a protein, and this protein interacts with other substances to express the hereditary trait." },
+            "unit3_genome_project_title_full": { "ar": "مشروع الجينوم البشري (Human Genome Project)", "en": "Human Genome Project" },
+            "unit3_genome_project_desc_full": { "ar": "خريطة تفصيلية للمجموعات الكاملة للجينات البشرية الموجودة في الكروموسومات. يهدف إلى تحديد تسلسل القواعد الكيميائية في DNA وتحديد جميع الجينات البشرية ومعرفة وظائفها. أهدافه: تحديد الأمراض الوراثية، تطوير أساليب تشخيص وعلاج الأمراض، فهم تطور الإنسان.", "en": "A detailed map of the complete set of human genes found in chromosomes. It aims to determine the sequence of chemical bases in DNA, identify all human genes and their functions. Its goals: Identify genetic diseases, develop diagnostic and treatment methods, understand human evolution." },
+            "unit3_hormones_title_original_full": { "ar": "الهرمونات: رسائل الجسم الكيميائية", "en": "Hormones: The Body's Chemical Messengers" },
+            "unit3_hormones_intro_original_full": { "ar": "هي مواد كيميائية أو رسائل كيميائية تنتجها غدد صماء، تقوم بتنظيم وتنسيق معظم الأنشطة والوظائف الحيوية في جسم الكائن الحي. تفرزها الغدد الصماء مباشرة في مجرى الدم الذي ينقلها إلى الخلايا المستهدفة. أي خلل (زيادة أو نقص) يسبب \"خلل هرموني\".", "en": "Chemical substances or messages produced by endocrine glands, regulating and coordinating most vital activities and functions in the organism's body. Endocrine glands secrete them directly into the bloodstream, which transports them to target cells. Any imbalance (excess or deficiency) causes a \"hormone disorder.\"" },
+            "gland_pituitary_name_original_full": { "ar": "الغدة النخامية (المايسترو)", "en": "Pituitary Gland (The Master Gland)" },
+            "gland_pituitary_desc1_original_full": { "ar": "تقع أسفل المخ. تسمى الغدة الرئيسية لأنها تفرز هرمونات تنظم نشاط معظم الغدد الصماء الأخرى.", "en": "Located at the base of the brain. Called the master gland because it secretes hormones that regulate the activity of most other endocrine glands." },
+            "gland_pituitary_desc2_original_full": { "ar": "<strong>هرمون النمو:</strong> يتحكم في سرعة نمو الجسم. نقصه في مرحلة الطفولة يسبب القزامة، وزيادته تسبب العملاقة.", "en": "<strong>Growth Hormone:</strong> Controls the body's growth rate. Its deficiency in childhood causes dwarfism, and its excess causes gigantism." },
+            "gland_thyroid_name_original_full": { "ar": "الغدة الدرقية", "en": "Thyroid Gland" },
+            "gland_thyroid_desc_original_full": { "ar": "تقع في الجزء الأمامي من الرقبة على جانبي القصبة الهوائية. تفرز هرمون الثيروكسين (لعمليات التحول الغذائي، يحتاج ليود) وهرمون الكالسيتونين (ينظم مستوى الكالسيوم).", "en": "Located in the anterior part of the neck on both sides of the trachea. Secretes thyroxine hormone (for metabolic processes, requires iodine) and calcitonin hormone (regulates calcium levels)." },
+            "gland_adrenal_name_original_full": { "ar": "الغدتان الكظريتان", "en": "Adrenal Glands" },
+            "gland_adrenal_desc_original_full": { "ar": "تقعان فوق الكليتين. تفرزان هرمون الأدرينالين (يحفز الجسم للاستجابة في حالات الطوارئ).", "en": "Located above the kidneys. Secrete adrenaline hormone (stimulates the body to respond in emergency situations)." },
+            "gland_pancreas_name_original_full": { "ar": "البنكرياس (غدة مختلطة)", "en": "Pancreas (Mixed Gland)" },
+            "gland_pancreas_insulin_original_full": { "ar": "<strong>الأنسولين:</strong> يخفض مستوى سكر الجلوكوز في الدم. نقصه يسبب البول السكري.", "en": "<strong>Insulin:</strong> Lowers blood glucose levels. Its deficiency causes diabetes mellitus." },
+            "gland_pancreas_glucagon_original_full": { "ar": "<strong>الجلوكاجون:</strong> يرفع مستوى سكر الجلوكوز في الدم.", "en": "<strong>Glucagon:</strong> Raises blood glucose levels." },
+            "gland_reproductive_name_original_full": { "ar": "الغدد التناسلية", "en": "Reproductive Glands" },
+            "gland_reproductive_testes_original_full": { "ar": "<strong>الخصيتان (ذكور):</strong> تفرزان هرمون التستوستيرون (مسؤول عن الصفات الجنسية الثانوية الذكرية).", "en": "<strong>Testes (males):</strong> Secrete testosterone hormone (responsible for male secondary sexual characteristics)." },
+            "gland_reproductive_ovaries_original_full": { "ar": "<strong>المبيضان (إناث):</strong> يفرزان هرمون الإستروجين (مسؤول عن الصفات الجنسية الثانوية الأنثوية) وهرمون البروجسترون (يحفز نمو بطانة الرحم).", "en": "<strong>Ovaries (females):</strong> Secrete estrogen hormone (responsible for female secondary sexual characteristics) and progesterone hormone (stimulates the growth of the uterine lining)." },
+            
+            "extra_main_title": { "ar": "أنشطة ومصطلحات إضافية", "en": "Additional Activities & Glossary" },
+            "quiz_title": { "ar": "اختبار قصير", "en": "Short Quiz" },
+            "quiz_q1": { "ar": "اذكر مثالاً لتفاعل انحلال حراري ينتج عنه راسب أسود.", "en": "Give an example of a thermal decomposition reaction that produces a black precipitate." },
+            "quiz_q2": { "ar": "فسر لماذا يتفاعل الصوديوم مع الماء بعنف بينما يتفاعل النحاس مع حمض الهيدروكلوريك المخفف ببطء شديد أو لا يتفاعل؟", "en": "Explain why sodium reacts violently with water while copper reacts very slowly or not at all with dilute hydrochloric acid." },
+            "quiz_q3": { "ar": "ما المقصود بتفاعل التعادل؟ واكتب معادلة كيميائية موزونة توضح هذا التفاعل.", "en": "What is meant by a neutralization reaction? Write a balanced chemical equation to illustrate this reaction." },
+            "quiz_q4": { "ar": "عرف العامل المؤكسد طبقاً للمفهوم الإلكتروني.", "en": "Define an oxidizing agent according to the electronic concept." },
+            "quiz_q5": { "ar": "اذكر عاملين يؤثران على سرعة التفاعل الكيميائي من طبيعة المتفاعلات.", "en": "Mention two factors related to the nature of reactants that affect the rate of a chemical reaction." },
+            "quiz_q6": { "ar": "ما الفرق بين التيار الكهربي المستمر والتيار الكهربي المتردد من حيث الاتجاه؟", "en": "What is the difference between direct current (DC) and alternating current (AC) in terms of direction?" },
+            "quiz_q7": { "ar": "اذكر نص قانون أوم.", "en": "State Ohm's Law." },
+            "quiz_q8": { "ar": "ما هي وحدة قياس الإشعاع الممتص؟ وما هو الحد الأقصى الآمن للتعرض للإشعاع سنوياً للجمهور العام؟", "en": "What is the unit for measuring absorbed radiation? And what is the maximum safe annual exposure limit for the general public?" },
+            "quiz_q9": { "ar": "ماذا يحدث لنخاع العظام عند التعرض لجرعة إشعاعية كبيرة في فترة زمنية قصيرة؟", "en": "What happens to bone marrow when exposed to a large radiation dose in a short period?" },
+            "quiz_q10": { "ar": "عرف الجين.", "en": "Define a gene." },
+            "quiz_answer_key_toggle": { "ar": "مفتاح إجابة الاختبار القصير", "en": "Short Quiz Answer Key" },
+            "quiz_a1": { "ar": "انحلال هيدروكسيد النحاس (II) بالحرارة: Cu(OH)₂ --(حرارة)--> CuO (راسب أسود) + H₂O.", "en": "Decomposition of Copper (II) hydroxide by heat: Cu(OH)₂ --(heat)--> CuO (black precipitate) + H₂O." },
+            "quiz_a2": { "ar": "الصوديوم يقع قبل الهيدروجين في متسلسلة النشاط الكيميائي. النحاس يقع بعد الهيدروجين.", "en": "Sodium is above hydrogen in the chemical activity series. Copper is below hydrogen." },
+            "quiz_a3": { "ar": "تفاعل حمض مع قلوي لتكوين ملح وماء. مثال: HCl + NaOH --> NaCl + H₂O.", "en": "Reaction of an acid with an alkali to form salt and water. Example: HCl + NaOH --> NaCl + H₂O." },
+            "quiz_a4": { "ar": "المادة التي تكتسب إلكتروناً أو أكثر أثناء التفاعل الكيميائي.", "en": "The substance that gains one or more electrons during a chemical reaction." },
+            "quiz_a5": { "ar": "نوع الرابطة في جزيئات المتفاعلات، ومساحة سطح المتفاعلات المعرض للتفاعل.", "en": "Type of bonding in reactant molecules, and surface area of reactants exposed to reaction." },
+            "quiz_a6": { "ar": "المستمر يسري في اتجاه واحد فقط، أما المتردد فيسري في اتجاهين متعاكسين.", "en": "DC flows in one direction only, while AC flows in two opposite directions." },
+            "quiz_a7": { "ar": "يتناسب فرق الجهد بين طرفي موصل تناسباً طردياً مع شدة التيار المار فيه عند ثبوت درجة الحرارة.", "en": "The potential difference across a conductor is directly proportional to the current flowing through it, provided the temperature remains constant." },
+            "quiz_a8": { "ar": "السيفرت (Sievert). الحد الآمن للجمهور العام هو 1 ميلي سيفرت/سنة.", "en": "Sievert (Sv). The maximum safe limit for the general public is 1 milliSievert/year." },
+            "quiz_a9": { "ar": "يحدث تدمير لنخاع العظام، مما يؤثر على تكوين خلايا الدم.", "en": "Destruction of bone marrow occurs, affecting blood cell formation." },
+            "quiz_a10": { "ar": "جزء من الحمض النووي (DNA) مسئول عن إظهار صفة وراثية معينة.", "en": "A segment of DNA responsible for expressing a specific hereditary trait." },
+            "essay_q_title": { "ar": "أسئلة مقالية مقترحة", "en": "Suggested Essay Questions" },
+            "essay_q1": { "ar": "قارن بين تفاعلات الإحلال البسيط وتفاعلات الإحلال المزدوج مع ذكر أمثلة لكل نوع.", "en": "Compare simple substitution reactions and double substitution reactions, giving examples of each type." },
+            "essay_q2": { "ar": "اشرح دور العوامل الحفازة في التفاعلات الكيميائية، مع التوضيح بالرسم البياني لتأثير العامل الحفاز على طاقة التنشيط.", "en": "Explain the role of catalysts in chemical reactions, illustrating with a graph the effect of a catalyst on activation energy." },
+            "essay_q3": { "ar": "وضح كيف يتم قياس كل من شدة التيار الكهربي وفرق الجهد الكهربي والمقاومة الكهربية في الدائرة الكهربية، مع ذكر الأجهزة المستخدمة وكيفية توصيلها.", "en": "Explain how electric current intensity, potential difference, and electric resistance are measured in an electric circuit, mentioning the devices used and how they are connected." },
+            "essay_q4": { "ar": "ناقش الآثار الضارة للإشعاع النووي على الكائنات الحية، مع التمييز بين آثار التعرض لجرعة كبيرة في وقت قصير وآثار التعرض لجرعات صغيرة في وقت طويل.", "en": "Discuss the harmful effects of nuclear radiation on living organisms, distinguishing between the effects of exposure to a large dose in a short time and the effects of exposure to small doses over a long time." },
+            "essay_q5": { "ar": "اشرح تجربة لتوضيح القانون الأول لمندل (قانون انعزال العوامل) موضحاً الآباء والجاميتات والجيل الأول والجيل الثاني والنسب الناتجة.", "en": "Explain an experiment to illustrate Mendel's First Law (Law of Segregation), showing parents, gametes, the first generation, the second generation, and the resulting ratios." },
+            "glossary_title": { "ar": "مسرد المصطلحات الرئيسية", "en": "Key Terms Glossary" },
+            "glossary_term1": { "ar": "<strong>الانحلال الحراري:</strong> تفكك المركب بالحرارة.", "en": "<strong>Thermal Decomposition:</strong> Breakdown of a compound by heat." },
+            "glossary_term2": { "ar": "<strong>الإحلال البسيط:</strong> يحل عنصر محل آخر أقل نشاطاً.", "en": "<strong>Simple Substitution:</strong> An element replaces another less reactive one." },
+            "glossary_term3": { "ar": "<strong>الإحلال المزدوج:</strong> تبادل أيوني مركبين.", "en": "<strong>Double Substitution:</strong> Ionic exchange between two compounds." },
+            "glossary_term4": { "ar": "<strong>الأكسدة:</strong> زيادة الأكسجين أو فقد إلكترونات.", "en": "<strong>Oxidation:</strong> Gain of oxygen or loss of electrons." },
+            "glossary_term5": { "ar": "<strong>الاختزال:</strong> نقص الأكسجين أو اكتساب إلكترونات.", "en": "<strong>Reduction:</strong> Loss of oxygen or gain of electrons." },
+            "glossary_term6": { "ar": "<strong>العامل المؤكسد:</strong> يمنح الأكسجين أو يكتسب إلكترونات.", "en": "<strong>Oxidizing Agent:</strong> Donates oxygen or gains electrons." },
+            "glossary_term7": { "ar": "<strong>العامل المختزل:</strong> يسحب الأكسجين أو يفقد إلكترونات.", "en": "<strong>Reducing Agent:</strong> Removes oxygen or loses electrons." },
+            "glossary_term8": { "ar": "<strong>سرعة التفاعل الكيميائي:</strong> معدل التغير في التركيز مع الزمن.", "en": "<strong>Rate of Chemical Reaction:</strong> Change in concentration over time." },
+            "glossary_term9": { "ar": "<strong>العامل الحفاز:</strong> مادة تغير سرعة التفاعل دون أن تستهلك.", "en": "<strong>Catalyst:</strong> Substance that alters reaction rate without being consumed." },
+            "glossary_term10": { "ar": "<strong>الإنزيمات:</strong> عوامل حفازة حيوية.", "en": "<strong>Enzymes:</strong> Biological catalysts." },
+            "glossary_term11": { "ar": "<strong>شدة التيار الكهربي:</strong> كمية الشحنة المارة في الثانية.", "en": "<strong>Electric Current Intensity:</strong> Amount of charge passing per second." },
+            "glossary_term12": { "ar": "<strong>فرق الجهد الكهربي:</strong> الشغل المبذول لنقل شحنة.", "en": "<strong>Electric Potential Difference:</strong> Work done to move a charge." },
+            "glossary_term13": { "ar": "<strong>المقاومة الكهربية:</strong> الممانعة التي يلقاها التيار.", "en": "<strong>Electric Resistance:</strong> Opposition to current flow." },
+            "glossary_term14": { "ar": "<strong>قانون أوم:</strong> العلاقة بين الجهد والتيار والمقاومة.", "en": "<strong>Ohm's Law:</strong> Relationship between voltage, current, and resistance." },
+            "glossary_term15": { "ar": "<strong>الريوستات المنزلق:</strong> مقاومة متغيرة.", "en": "<strong>Sliding Rheostat:</strong> Variable resistor." },
+            "glossary_term16": { "ar": "<strong>التيار المستمر (DC):</strong> تيار ثابت الاتجاه.", "en": "<strong>Direct Current (DC):</strong> Current with constant direction." },
+            "glossary_term17": { "ar": "<strong>التيار المتردد (AC):</strong> تيار متغير الاتجاه والشدة.", "en": "<strong>Alternating Current (AC):</strong> Current with varying direction and magnitude." },
+            "glossary_term18": { "ar": "<strong>القوة الدافعة الكهربية (emf):</strong> فرق الجهد لمصدر كهربي في دائرة مفتوحة.", "en": "<strong>Electromotive Force (emf):</strong> Potential difference of a source in an open circuit." },
+            "glossary_term19": { "ar": "<strong>النشاط الإشعاعي:</strong> تحول تلقائي لأنوية العناصر المشعة.", "en": "<strong>Radioactivity:</strong> Spontaneous transformation of radioactive nuclei." },
+            "glossary_term20": { "ar": "<strong>العناصر المشعة:</strong> عناصر يصدر عنها إشعاع.", "en": "<strong>Radioactive Elements:</strong> Elements that emit radiation." },
+            "glossary_term21": { "ar": "<strong>التلوث الإشعاعي:</strong> زيادة الإشعاع في البيئة.", "en": "<strong>Radioactive Pollution:</strong> Increase of radiation in the environment." },
+            "glossary_term22": { "ar": "<strong>السيفرت:</strong> وحدة قياس الإشعاع الممتص.", "en": "<strong>Sievert:</strong> Unit of absorbed radiation dose." },
+            "glossary_term23": { "ar": "<strong>علم الوراثة:</strong> يدرس انتقال الصفات الوراثية.", "en": "<strong>Genetics:</strong> Study of heredity." },
+            "glossary_term24": { "ar": "<strong>الصفات الوراثية:</strong> تنتقل من جيل لآخر.", "en": "<strong>Inherited Traits:</strong> Passed from one generation to another." },
+            "glossary_term25": { "ar": "<strong>الصفة السائدة:</strong> تظهر في الجيل الأول.", "en": "<strong>Dominant Trait:</strong> Appears in the first generation." },
+            "glossary_term26": { "ar": "<strong>الصفة المتنحية:</strong> تختفي في الجيل الأول.", "en": "<strong>Recessive Trait:</strong> Disappears in the first generation." },
+            "glossary_term27": { "ar": "<strong>الفرد النقي:</strong> يحمل عاملين متماثلين للصفة.", "en": "<strong>Pure Individual:</strong> Carries two identical factors for a trait." },
+            "glossary_term28": { "ar": "<strong>الفرد الهجين:</strong> يحمل عاملين مختلفين للصفة.", "en": "<strong>Hybrid Individual:</strong> Carries two different factors for a trait." },
+            "glossary_term29": { "ar": "<strong>الجاميتات:</strong> خلايا جنسية تحمل عامل واحد للصفة.", "en": "<strong>Gametes:</strong> Sex cells carrying one factor for a trait." },
+            "glossary_term30": { "ar": "<strong>الكروموسوم:</strong> تركيب يحمل الجينات في النواة.", "en": "<strong>Chromosome:</strong> Structure carrying genes in the nucleus." },
+            "glossary_term31": { "ar": "<strong>الحمض النووي (DNA):</strong> يحمل المعلومات الوراثية.", "en": "<strong>DNA:</strong> Carries genetic information." },
+            "glossary_term32": { "ar": "<strong>الجين:</strong> جزء من DNA مسئول عن صفة.", "en": "<strong>Gene:</strong> Segment of DNA responsible for a trait." },
+            "glossary_term33": { "ar": "<strong>مشروع الجينوم البشري:</strong> خريطة الجينات البشرية.", "en": "<strong>Human Genome Project:</strong> Map of human genes." },
+
+            "footer_text": { "ar": "يا رب تكون الرحلة دي كانت ممتعة ومفيدة ليك! عالم العلوم كبير وجميل ومليان حاجات نكتشفها سوا!", "en": "Hope this journey was fun and useful for you! The world of science is big, beautiful, and full of things to discover together!" },
+            "footer_copyright": { "ar": "© <span id=\"currentYear\"></span> جميع الحقوق محفوظة لرحلة العلوم.", "en": "© <span id=\"currentYear\"></span> All rights reserved for Science Journey." }
+        };
+
+        // --- End Translations ---
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const loader = document.getElementById('loader');
+            const atomLoaderIcon = loader.querySelector('.atom-loader');
+            const navBrandText = document.getElementById('nav-brand-text'); 
+
+            function updateLoaderColor(lang) {
+                const activeUnit = document.querySelector('.nav-link.active');
+                let color = 'var(--neon-blue)'; 
+                if (activeUnit) {
+                    const unitId = activeUnit.getAttribute('href').substring(1);
+                    if (unitId === 'unit1') color = 'var(--neon-blue)';
+                    else if (unitId === 'unit2') color = 'var(--neon-yellow)';
+                    else if (unitId === 'unit3') color = 'var(--neon-green)';
+                    else if (unitId === 'extra-activities') color = 'var(--neon-purple)';
+                } else if (localStorage.getItem('lastActiveUnitColor')) {
+                     color = localStorage.getItem('lastActiveUnitColor');
+                }
+                atomLoaderIcon.style.color = color;
+                loader.querySelector('p').style.color = color;
+            }
+            
+            const langButtons = document.querySelectorAll('.language-switcher button');
+            const htmlEl = document.documentElement;
+
+            function setLanguage(lang) {
+                htmlEl.lang = lang;
+                htmlEl.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                document.body.className = lang === 'ar' ? 'ar' : 'en'; 
+
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.getAttribute('data-key');
+                    if (translations[key] && translations[key][lang]) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                            el.placeholder = translations[key][lang];
+                        } else {
+                            el.innerHTML = translations[key][lang]; 
+                        }
+                    }
+                });
+                localStorage.setItem('preferredLanguage', lang);
+                updateLangButtonStates(lang);
+                updateNavLinksActiveColor(lang); 
+            }
+
+            function updateLangButtonStates(currentLang) {
+                langButtons.forEach(btn => {
+                    if (btn.getAttribute('data-lang') === currentLang) {
+                        btn.classList.add('active-lang');
+                        const activeUnitLink = document.querySelector('#nav-links-container a.active');
+                        let unitColor = 'var(--neon-blue)'; 
+                        if (activeUnitLink) {
+                            const unitId = activeUnitLink.getAttribute('href').substring(1);
+                            if (unitId === 'unit1') unitColor = 'var(--neon-blue)';
+                            else if (unitId === 'unit2') unitColor = 'var(--neon-yellow)';
+                            else if (unitId === 'unit3') unitColor = 'var(--neon-green)';
+                            else if (unitId === 'extra-activities') unitColor = 'var(--neon-purple)';
+                        }
+                        btn.style.backgroundColor = unitColor;
+                        btn.style.borderColor = unitColor;
+
+                    } else {
+                        btn.classList.remove('active-lang');
+                        btn.style.backgroundColor = ''; 
+                        btn.style.borderColor = '';
+                    }
+                });
+            }
+
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const lang = button.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'ar';
+            setLanguage(preferredLanguage);
+
+
+            if (loader) {
+                window.addEventListener('load', () => {
+                    loader.classList.add('hidden');
+                });
+            }
+
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                document.querySelectorAll('#mobile-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            const navLinks = document.querySelectorAll('#nav-links-container a, #mobile-menu a');
+            const sections = document.querySelectorAll('main section[id]');
+            const navElement = document.getElementById('main-nav');
+            const navHeight = navElement ? navElement.offsetHeight : 60;
+
+
+            function updateNavLinksActiveColor(currentLang) {
+                const activeLink = document.querySelector('#nav-links-container a.active');
+                let unitColor = 'var(--neon-blue)'; 
+                
+                if (activeLink) {
+                    const unitId = activeLink.getAttribute('href').substring(1);
+                    if (unitId === 'unit1') unitColor = 'var(--neon-blue)';
+                    else if (unitId === 'unit2') unitColor = 'var(--neon-yellow)';
+                    else if (unitId === 'unit3') unitColor = 'var(--neon-green)';
+                    else if (unitId === 'extra-activities') unitColor = 'var(--neon-purple)';
+                    
+                    activeLink.style.color = unitColor;
+                    activeLink.style.borderBottomColor = unitColor;
+                    if(navBrandText) navBrandText.style.color = unitColor; 
+                } else {
+                     if(navBrandText) navBrandText.style.color = 'var(--neon-blue)'; 
+                }
+                localStorage.setItem('lastActiveUnitColor', unitColor); 
+                updateLoaderColor(currentLang); 
+                
+                const activeLangButton = document.querySelector('.language-switcher button.active-lang');
+                if (activeLangButton) {
+                    activeLangButton.style.backgroundColor = unitColor;
+                    activeLangButton.style.borderColor = unitColor;
+                }
+            }
+
+
+            function changeNavActiveState() {
+                let currentSectionId = '';
+                const pageTopOffset = navHeight + 50; 
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - pageTopOffset) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    link.style.color = ''; 
+                    link.style.borderBottomColor = 'transparent'; 
+
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+                updateNavLinksActiveColor(htmlEl.lang);
+            }
+
+
+            window.addEventListener('scroll', changeNavActiveState);
+            changeNavActiveState(); 
+
+            const collapsibles = document.querySelectorAll('.collapsible-question');
+            collapsibles.forEach(collapsible => {
+                collapsible.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                        content.style.maxHeight = null;
+                        content.classList.remove('open');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.classList.add('open');
+                    }
+                });
+            });
+            
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) { 
+                const yearText = translations['footer_copyright'][htmlEl.lang || 'ar'];
+                currentYearSpan.parentElement.innerHTML = yearText.replace('<span id="currentYear"></span>', new Date().getFullYear());
+            }
+
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1 && document.querySelector(href)) {
+                        e.preventDefault();
+                        let targetElement = document.querySelector(href);
+                        let targetPosition = targetElement.offsetTop;
+                        if (navElement) {
+                             targetPosition -= navHeight;
+                        }
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            if(scrollToTopBtn){
+                window.addEventListener('scroll', function() { 
+                    let currentUnitColor = localStorage.getItem('lastActiveUnitColor') || 'var(--neon-blue)';
+                    scrollToTopBtn.style.backgroundColor = currentUnitColor;
+                    
+                    let shadowColor = 'rgba(0,0,0,0.3)'; // Default shadow
+                    if (currentUnitColor.startsWith('var(')) {
+                        const colorVarName = currentUnitColor.slice(4, -1); // e.g., --neon-blue
+                        const colorValue = getComputedStyle(document.documentElement).getPropertyValue(colorVarName).trim();
+                        if (colorValue) {
+                             // Attempt to create a shadow color from the resolved variable
+                             // This is a simplified approach; robust RGBA conversion would be more complex
+                            shadowColor = colorValue.replace(')',', 0.5)').replace('rgb(','rgba(');
+                            if (!shadowColor.startsWith('rgba')) shadowColor = 'rgba(0, 191, 255, 0.5)'; // Fallback
+                        }
+                    } else {
+                         shadowColor = currentUnitColor.replace(')',', 0.5)').replace('rgb(','rgba(');
+                    }
+                    scrollToTopBtn.style.boxShadow = `0 5px 15px ${shadowColor}`;
+
+
+                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) { 
+                        scrollToTopBtn.classList.add('show');
+                    } else {
+                        scrollToTopBtn.classList.remove('show');
+                    }
+                });
+                scrollToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                });
+            }
+
+            const scrollElements = document.querySelectorAll(".animate-on-scroll, .unit-card, .extra-content-card");
+            const elementInView = (el, threshold = 0.1) => { 
+                const elementTop = el.getBoundingClientRect().top;
+                const elementBottom = el.getBoundingClientRect().bottom;
+                const elementHeight = el.getBoundingClientRect().height;
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                
+                return (
+                    elementTop <= viewportHeight - (elementHeight * threshold) && elementBottom >= (elementHeight * threshold)
+                );
+            };
+           
+            const displayScrollElement = (element) => {
+                element.classList.add("is-visible");
+            };
+            
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 0.15)) { 
+                        displayScrollElement(el);
+                    }
+                });
+            };
+            window.addEventListener("scroll", handleScrollAnimation);
+            setTimeout(handleScrollAnimation, 150); 
+            handleScrollAnimation(); 
+        });
+    </script>
+</body>
+</html>
+
+--
